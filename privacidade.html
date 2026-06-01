@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidade — Cronos</title>
+  <meta name="description" content="Política de Privacidade do Cronos, calculadora de datas. Saiba como tratamos seus dados e quais são seus direitos segundo a LGPD.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Sobreposições específicas para página de texto longo ── */
+
+    .priv-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4rem 2rem 8rem;
+    }
+
+    /* breadcrumb */
+    .priv-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 3rem;
+      font-size: 0.75rem;
+      color: var(--text3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .priv-breadcrumb a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .priv-breadcrumb a:hover { color: var(--text); }
+
+    .priv-breadcrumb svg {
+      width: 12px;
+      height: 12px;
+      opacity: 0.4;
+    }
+
+    /* hero da página */
+    .priv-hero {
+      margin-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2.5rem;
+    }
+
+    .priv-hero .panel-tag { margin-bottom: 1.25rem; }
+
+    .priv-hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .priv-hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .priv-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+
+    .priv-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .priv-meta-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text3);
+    }
+
+    .priv-meta-val {
+      font-size: 0.82rem;
+      color: var(--text2);
+    }
+
+    /* corpo do texto */
+    .priv-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .priv-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .priv-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .priv-section h2::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .priv-section p,
+    .priv-section li {
+      font-size: 0.9rem;
+      color: var(--text2);
+      line-height: 1.75;
+    }
+
+    .priv-section ul,
+    .priv-section ol {
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .priv-section li::marker {
+      color: var(--accent);
+    }
+
+    .priv-section strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .priv-section a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent2);
+      transition: color 0.2s;
+    }
+
+    .priv-section a:hover { color: var(--text); }
+
+    /* bloco de destaque */
+    .priv-highlight {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent2);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+    }
+
+    .priv-highlight p {
+      color: var(--text) !important;
+    }
+
+    /* tabela de direitos Art. 18 */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .right-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.9rem 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .right-card:hover { border-color: var(--border2); }
+
+    .right-card-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .right-card-desc {
+      font-size: 0.8rem;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+
+    /* bloco de contato */
+    .contact-card {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .contact-card-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text3);
+    }
+
+    .contact-card-email {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-card-email:hover { color: var(--text); }
+
+    .contact-card-note {
+      font-size: 0.8rem;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    /* divisor decorativo */
+    .priv-divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* índice lateral (desktop) */
+    @media (min-width: 1080px) {
+      .priv-layout {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 3rem;
+        align-items: start;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 3rem 8rem;
+      }
+
+      .priv-wrap {
+        max-width: unset;
+        margin: 0;
+        padding: 0;
+        min-width: 0;
+      }
+
+      .priv-toc {
+        position: sticky;
+        top: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .toc-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text3);
+        margin-bottom: 8px;
+      }
+
+      .toc-link {
+        font-size: 0.78rem;
+        color: var(--text3);
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 6px;
+        transition: all 0.18s;
+        border-left: 2px solid transparent;
+        line-height: 1.4;
+      }
+
+      .toc-link:hover {
+        color: var(--text2);
+        border-left-color: var(--border2);
+        background: var(--bg2);
+      }
+    }
+
+    @media (max-width: 1079px) {
+      .priv-toc { display: none; }
+      .priv-layout {
+        display: block;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .rights-grid { grid-template-columns: 1fr; }
+      .priv-meta { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+
+  <header>
+    <div class="logo">⧖ Cronos</div>
+    <nav>
+      <a href="index.html" class="nav-link">← Voltar à calculadora</a>
+    </nav>
+  </header>
+
+  <div class="priv-layout">
+
+    <!-- Índice (desktop) -->
+    <aside class="priv-toc">
+      <p class="toc-label">Nesta página</p>
+      <a href="#intro"       class="toc-link">Introdução</a>
+      <a href="#controlador" class="toc-link">Controlador</a>
+      <a href="#dados"       class="toc-link">Dados tratados</a>
+      <a href="#cookies"     class="toc-link">Cookies</a>
+      <a href="#terceiros"   class="toc-link">Terceiros</a>
+      <a href="#retencao"    class="toc-link">Retenção</a>
+      <a href="#direitos"    class="toc-link">Seus direitos</a>
+      <a href="#menores"     class="toc-link">Menores de idade</a>
+      <a href="#alteracoes"  class="toc-link">Alterações</a>
+      <a href="#contato"     class="toc-link">Contato DPO</a>
+    </aside>
+
+    <main class="priv-wrap">
+
+      <!-- Breadcrumb -->
+      <div class="priv-breadcrumb">
+        <a href="index.html">Cronos</a>
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Política de Privacidade</span>
+      </div>
+
+      <!-- Hero -->
+      <div class="priv-hero">
+        <span class="panel-tag">legal · lgpd</span>
+        <h1>Política de <em>Privacidade</em></h1>
+        <p class="panel-sub">Como o Cronos trata suas informações e quais são os seus direitos sob a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).</p>
+        <div class="priv-meta">
+          <div class="priv-meta-item">
+            <span class="priv-meta-label">Vigência</span>
+            <span class="priv-meta-val">Junho de 2026</span>
+          </div>
+          <div class="priv-meta-item">
+            <span class="priv-meta-label">Versão</span>
+            <span class="priv-meta-val">1.0</span>
+          </div>
+          <div class="priv-meta-item">
+            <span class="priv-meta-label">Aplicável a</span>
+            <span class="priv-meta-val">cronoscalculator.com.br</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Corpo -->
+      <div class="priv-body">
+
+        <div class="priv-section" id="intro">
+          <h2>Introdução</h2>
+          <p>
+            O <strong>Cronos</strong> é uma calculadora de datas gratuita, de uso público, sem cadastro e sem qualquer formulário de coleta de dados pessoais identificáveis. Não existe conta de usuário, perfil ou login neste serviço.
+          </p>
+          <p>
+            Esta Política descreve de forma transparente as categorias de dados que podem ser tratadas durante o uso do site, os terceiros eventualmente envolvidos após consentimento e os direitos que você possui como titular de dados nos termos da LGPD.
+          </p>
+        </div>
+
+        <div class="priv-divider"></div>
+
+        <div class="priv-section" id="controlador">
+          <h2>Controlador dos dados</h2>
+          <p>
+            O controlador responsável pelo tratamento de dados é o mantenedor do site Cronos, pessoa física, com canal de contato disponível ao final desta página. Para fins da LGPD, o mesmo mantenedor acumula a função de <strong>Encarregado de Proteção de Dados (DPO)</strong>.
+          </p>
+        </div>
+
+        <div class="priv-divider"></div>
+
+        <div class="priv-section" id="dados">
+          <h2>Dados tratados</h2>
+
+          <div class="priv-highlight">
+            <p><strong>O Cronos não coleta, armazena nem processa dados pessoais identificáveis em seus servidores.</strong> Todas as datas inseridas nas calculadoras são processadas exclusivamente no seu navegador (client-side) e nunca são transmitidas.</p>
+          </div>
+
+          <p>Os únicos dados que podem ser gerados durante o acesso são:</p>
+
+          <ul>
+            <li><strong>Dados de acesso (logs de servidor):</strong> seu endereço IP, tipo de navegador, sistema operacional e páginas visitadas podem ser registrados temporariamente pela infraestrutura de hospedagem (Vercel) e pela rede de entrega de conteúdo (Cloudflare). Esses dados são tratados sob as políticas de privacidade desses provedores e servem exclusivamente para fins de segurança, diagnóstico técnico e combate a abusos.</li>
+            <li><strong>Preferência de consentimento (cookie essencial):</strong> a escolha que você faz no banner de privacidade é salva localmente no seu dispositivo, via <code>localStorage</code>, sob a chave <code>cronos_consent</code>. Esse dado nunca é enviado a nenhum servidor e pode ser apagado a qualquer momento limpando os dados do site no seu navegador.</li>
+            <li><strong>Dados analíticos (somente com consentimento):</strong> se você autorizar o uso de cookies analíticos, poderemos ativar o Google Analytics para compreender métricas agregadas de uso — como número de sessões e páginas mais acessadas. Nenhum dado analítico é coletado sem consentimento explícito.</li>
+            <li><strong>Dados publicitários (somente com consentimento):</strong> se você autorizar cookies publicitários, poderemos exibir anúncios personalizados via Google AdSense. Nenhum cookie publicitário é carregado sem consentimento explícito.</li>
+          </ul>
+        </div>
+
+        <div class="priv-divider"></div>
+
+        <div class="priv-section" id="cookies">
+          <h2>Cookies e armazenamento local</h2>
+
+          <p>O Cronos utiliza as seguintes categorias de cookies e mecanismos de armazenamento:</p>
+
+          <ul>
+            <li>
+              <strong>Essenciais:</strong> o <code>localStorage</code> registra apenas sua preferência de consentimento (<code>cronos_consent</code>). Sem esse dado, o banner apareceria em todo acesso. Não é possível desativar esse item sem comprometer a funcionalidade do aviso de privacidade.
+            </li>
+            <li>
+              <strong>Analíticos (opcional):</strong> após consentimento, o Google Analytics pode instalar cookies de sessão e de mensuração (<code>_ga</code>, <code>_gid</code> e similares). A retenção padrão é de 2 anos para <code>_ga</code> e 24 horas para <code>_gid</code>.
+            </li>
+            <li>
+              <strong>Publicitários (opcional):</strong> após consentimento, o Google AdSense pode instalar cookies para personalização de anúncios. A política de cookies do Google é detalhada em <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener noreferrer">policies.google.com/technologies/cookies</a>.
+            </li>
+          </ul>
+
+          <p>
+            Você pode alterar ou revogar seu consentimento a qualquer momento limpando o dado <code>cronos_consent</code> do armazenamento local do navegador (Configurações → Privacidade → Dados do site) e recarregando a página.
+          </p>
+        </div>
+
+        <div class="priv-divider"></div>
+
+        <div class="priv-section" id="terceiros">
+          <h2>Compartilhamento com terceiros</h2>
+
+          <p>O Cronos pode envolver os seguintes terceiros no tratamento de dados técnicos ou analíticos:</p>
+
+          <ul>
+            <li><strong>Vercel Inc.</strong> — hospedagem e entrega de arquivos estáticos. Política: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">vercel.com/legal/privacy-policy</a></li>
+            <li><strong>Cloudflare Inc.</strong> — CDN e proteção de rede. Política: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">cloudflare.com/privacypolicy</a></li>
+            <li><strong>Google LLC (Analytics)</strong> — métricas de uso, somente com consentimento. Política: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></li>
+            <li><strong>Google LLC (AdSense)</strong> — publicidade contextual, somente com consentimento. Política: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></li>
+            <li><strong>Google Fonts (fonts.googleapis.com)</strong> — carregamento das fontes DM Serif Display e DM Sans. Podem ser coletados dados técnicos mínimos (IP, user-agent) pelo servidor de fontes do Google.</li>
+          </ul>
+
+          <p>
+            O Cronos não vende, cede ou comercializa dados pessoais a terceiros além dos provedores de infraestrutura listados acima, nos limites estritamente necessários à operação do serviço.
+          </p>
+        </div>
+
+        <div class="priv-divider"></div>
+
+        <div class="priv-section" id="retencao">
+          <h2>Retenção e base legal</h2>
+          <p>
+            Os dados técnicos de acesso (logs) são retidos pelos provedores de infraestrutura conforme suas próprias políticas — geralmente entre 30 e 90 dias. O Cronos não possui acesso direto ou controle sobre esses registros.
+          </p>
+          <p>
+            A base legal para o tratamento de dados analíticos e publicitários é o <strong>consentimento</strong> do titular (Art. 7º, I da LGPD). Para dados técnicos de infraestrutura, a base é o <strong>legítimo interesse</strong> dos provedores na segurança e integridade de suas redes (Art. 7º, IX da LGPD).
+          </p>
+        </div>
+
+        <div class="priv-divider"></div>
+
+        <div class="priv-section" id="direitos">
+          <h2>Seus direitos — Art. 18 da LGPD</h2>
+          <p>Como titular de dados pessoais, você possui os seguintes direitos, que podem ser exercidos a qualquer tempo mediante contato com o DPO:</p>
+
+          <div class="rights-grid">
+            <div class="right-card">
+              <p class="right-card-title">Confirmação e acesso</p>
+              <p class="right-card-desc">Saber se tratamos seus dados e obter cópia das informações que possuímos sobre você.</p>
+            </div>
+            <div class="right-card">
+              <p class="right-card-title">Correção</p>
+              <p class="right-card-desc">Solicitar a atualização ou retificação de dados incompletos, inexatos ou desatualizados.</p>
+            </div>
+            <div class="right-card">
+              <p class="right-card-title">Anonimização, bloqueio ou eliminação</p>
+              <p class="right-card-desc">Requerer que dados desnecessários ou excessivos sejam anonimizados, bloqueados ou excluídos.</p>
+            </div>
+            <div class="right-card">
+              <p class="right-card-title">Portabilidade</p>
+              <p class="right-card-desc">Solicitar a transferência dos seus dados a outro fornecedor de serviço ou produto.</p>
+            </div>
+            <div class="right-card">
+              <p class="right-card-title">Eliminação após consentimento</p>
+              <p class="right-card-desc">Requerer a exclusão de dados tratados com base no seu consentimento, salvo exceções legais.</p>
+            </div>
+            <div class="right-card">
+              <p class="right-card-title">Revogação do consentimento</p>
+              <p class="right-card-desc">Retirar o consentimento a qualquer momento, sem prejuízo dos tratamentos já realizados.</p>
+            </div>
+            <div class="right-card">
+              <p class="right-card-title">Informação sobre compartilhamento</p>
+              <p class="right-card-desc">Saber com quais entidades públicas e privadas seus dados foram compartilhados.</p>
+            </div>
+            <div class="right-card">
+              <p class="right-card-title">Petição à ANPD</p>
+              <p class="right-card-desc">Apresentar reclamação à Autoridade Nacional de Proteção de Dados em caso de descumprimento.</p>
+            </div>
+          </div>
+
+          <p>
+            Para exercer qualquer desses direitos, entre em contato pelo canal indicado na seção <a href="#contato">Contato / DPO</a> abaixo. Responderemos em até <strong>15 dias úteis</strong>, conforme previsto na LGPD.
+          </p>
+        </div>
+
+        <div class="priv-divider"></div>
+
+        <div class="priv-section" id="menores">
+          <h2>Menores de idade</h2>
+          <p>
+            O Cronos é um serviço de uso geral, de acesso público e sem cadastro. Não coletamos intencionalmente dados de crianças (menores de 12 anos) ou adolescentes (entre 12 e 18 anos). Caso um responsável legal identifique que dados de um menor foram tratados de forma não autorizada, solicitamos contato imediato pelo canal DPO para que possamos adotar as medidas cabíveis.
+          </p>
+        </div>
+
+        <div class="priv-divider"></div>
+
+        <div class="priv-section" id="alteracoes">
+          <h2>Alterações nesta Política</h2>
+          <p>
+            Esta Política pode ser atualizada periodicamente para refletir mudanças no serviço, na legislação ou nas práticas de privacidade. Alterações relevantes serão comunicadas por meio de aviso em destaque no site. A data de vigência no topo desta página indica a versão em vigor.
+          </p>
+          <p>
+            Recomendamos que você revise esta página ocasionalmente. O uso continuado do Cronos após a publicação de alterações implica a aceitação dos novos termos.
+          </p>
+        </div>
+
+        <div class="priv-divider"></div>
+
+        <div class="priv-section" id="contato">
+          <h2>Contato — Encarregado de Proteção de Dados (DPO)</h2>
+          <p>
+            Para exercer seus direitos, reportar incidentes de privacidade ou tirar dúvidas sobre esta Política, utilize o canal abaixo. Todas as solicitações relacionadas à LGPD devem ser enviadas com o assunto <strong>"LGPD — [tipo de solicitação]"</strong> para facilitar o atendimento.
+          </p>
+
+          <div class="contact-card">
+            <p class="contact-card-title">Canal de contato LGPD</p>
+            <!-- Substitua pelo seu e-mail real antes de publicar -->
+            <a href="mailto:gulannomorelirosa@gmail.com" class="contact-card-email">gulannomorelirosa@gmail.com</a>
+            <p class="contact-card-note">
+              Prazo de resposta: até <strong>15 dias úteis</strong> a contar do recebimento da solicitação. Podemos solicitar informações adicionais para verificar a identidade do solicitante antes de atender pedidos relacionados a dados pessoais.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /priv-body -->
+
+    </main><!-- /priv-wrap -->
+
+  </div><!-- /priv-layout -->
+
+  <footer>
+    <p>Cronos &mdash; calculadora de datas e tempo &nbsp;·&nbsp; <a href="privacidade.html" style="color:var(--text3);text-decoration:none;border-bottom:1px solid var(--border)">Política de Privacidade</a></p>
+  </footer>
+
+</body>
+</html>
