@@ -230,7 +230,43 @@ function calcHoras() {
     </div>`;
 }
 
+function calcSemana() {
+  const val = document.getElementById('w-date').value;
+  if (!val) { showError('w-result', 'Informe uma data.'); return; }
+
+  const target = new Date(val + 'T00:00:00');
+  const today  = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const weekdayFull = target.toLocaleDateString('pt-BR', { weekday: 'long' });
+  const weekdayCap  = weekdayFull.charAt(0).toUpperCase() + weekdayFull.slice(1);
+
+  const isPast  = target < today;
+  const isToday = target.getTime() === today.getTime();
+
+  let badge, pretext;
+  if (isToday) {
+    badge = '<span class="badge-future">hoje</span>';
+    pretext = 'é';
+  } else if (isPast) {
+    badge = '<span class="badge-past">já passou</span>';
+    pretext = 'foi';
+  } else {
+    badge = '<span class="badge-future">futuro</span>';
+    pretext = 'será';
+  }
+
+  const el = document.getElementById('w-result');
+  el.classList.remove('hidden');
+  el.innerHTML = `
+    <div class="countdown-display">
+      <div class="countdown-big" style="font-size: clamp(2.2rem, 6vw, 3.5rem);">${weekdayCap}</div>
+      <div class="countdown-unit">${fmtDate(target)} ${pretext} ${weekdayCap.toLowerCase()} ${badge}</div>
+    </div>`;
+}
+
 document.getElementById('btn-idade').addEventListener('click', calcIdade);
 document.getElementById('btn-diff').addEventListener('click', calcDiff);
 document.getElementById('btn-countdown').addEventListener('click', calcCountdown);
 document.getElementById('btn-horas').addEventListener('click', calcHoras);
+document.getElementById('btn-semana').addEventListener('click', calcSemana);
