@@ -38,6 +38,7 @@
       <a href="#" class="nav-link" data-tab="diff">Entre datas</a>
       <a href="#" class="nav-link" data-tab="countdown">Contagem</a>
       <a href="#" class="nav-link" data-tab="horas">Horários</a>
+      <a href="#" class="nav-link" data-tab="semana">Dia da semana</a>
     </nav>
   </header>
 
@@ -125,6 +126,23 @@
         <button class="btn-calc" id="btn-horas">Calcular diferença</button>
       </div>
       <div id="h-result" class="result-area hidden"></div>
+    </section>
+
+    <!-- DIA DA SEMANA -->
+    <section class="panel" id="panel-semana">
+      <div class="panel-hero">
+        <span class="panel-tag">dia da semana</span>
+        <h1>Em que dia da semana <em>cai essa data</em>?</h1>
+        <p class="panel-sub">Descubra o dia da semana de qualquer data, passada ou futura.</p>
+      </div>
+      <div class="form-card">
+        <div class="field">
+          <label for="w-date">Data</label>
+          <input type="date" id="w-date">
+        </div>
+        <button class="btn-calc" id="btn-semana">Ver dia da semana</button>
+      </div>
+      <div id="w-result" class="result-area hidden"></div>
     </section>
 
   </main>
