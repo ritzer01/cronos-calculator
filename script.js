@@ -6,6 +6,7 @@ function escapeHTML(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#x27;');
 }
+
 const climaData = {
   "toronto": {
     nome: "Toronto, Canadá",
@@ -194,7 +195,7 @@ const climaData = {
       { mes: "Dezembro",  maxima: 20, minima: 6,  ceu: "ensolarado", chuva: "seco" }
     ]
   },
-"sao paulo": {
+  "sao paulo": {
     nome: "São Paulo, Brasil",
     meses: [
       { mes: "Janeiro",   maxima: 28, minima: 19, ceu: "parcialmente nublado", chuva: "chuva forte" },
@@ -296,7 +297,7 @@ const climaData = {
       { mes: "Dezembro",  maxima: 28, minima: 18, ceu: "ensolarado", chuva: "chuva moderada" }
     ]
   },
-"londres": {
+  "londres": {
     nome: "Londres, Reino Unido",
     meses: [
       { mes: "Janeiro",   maxima: 8,  minima: 3,  ceu: "nublado", chuva: "chuva moderada" },
@@ -585,7 +586,7 @@ const climaData = {
       { mes: "Dezembro",  maxima: 6,  minima: 1,  ceu: "nublado", chuva: "chuva leve" }
     ]
   },
-"tokyo": {
+  "tokyo": {
     nome: "Tóquio, Japão",
     meses: [
       { mes: "Janeiro",   maxima: 10, minima: 2,  ceu: "ensolarado", chuva: "seco" },
@@ -736,8 +737,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
   });
 });
 
-
-
 function fmt(n) {
   return Number(n).toLocaleString('pt-BR');
 }
@@ -746,7 +745,6 @@ function fmtDate(d) {
   return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
 }
 
-
 function diffDates(a, b) {
   let years  = b.getFullYear() - a.getFullYear();
   let months = b.getMonth()    - a.getMonth();
@@ -754,7 +752,6 @@ function diffDates(a, b) {
 
   if (days < 0) {
     months--;
-    // dias no mês anterior a b
     days += new Date(b.getFullYear(), b.getMonth(), 0).getDate();
   }
   if (months < 0) {
@@ -789,8 +786,6 @@ function totalItem(num, lbl) {
       <span class="t-lbl">${lbl}</span>
     </div>`;
 }
-
-
 
 function calcIdade() {
   const val = document.getElementById('i-birth').value;
@@ -827,8 +822,6 @@ function calcIdade() {
     </div>`;
 }
 
-
-
 function calcDiff() {
   const sv = document.getElementById('d-start').value;
   const ev = document.getElementById('d-end').value;
@@ -861,8 +854,6 @@ function calcDiff() {
       ${inverted ? '<span class="badge-past" style="margin-left:auto">ordem invertida</span>' : ''}
     </div>`;
 }
-
-
 
 function calcCountdown() {
   const val = document.getElementById('c-target').value;
@@ -901,8 +892,6 @@ function calcCountdown() {
       ${metricCard(tw,     'semanas')}
     </div>`;
 }
-
-
 
 function calcHoras() {
   const sv = document.getElementById('h-start').value;
@@ -980,15 +969,14 @@ function calcSemana() {
       <div class="countdown-unit">${fmtDate(target)} ${pretext} ${weekdayCap.toLowerCase()} ${badge}</div>
     </div>`;
 }
-// ─── Autocomplete genérico (reutilizado por cidade e mês) ──────────────────
 
 function setupAutocomplete(inputEl, suggestionsEl, getMatches, renderLabel, onSelect) {
   inputEl.addEventListener('focus', () => inputEl.select());
-  
+
   inputEl.addEventListener('input', () => {
     const query = inputEl.value.trim().toLowerCase();
     suggestionsEl.innerHTML = '';
-    inputEl.dataset.key = ''; // limpa seleção anterior ao digitar de novo
+    inputEl.dataset.key = '';
 
     if (!query) {
       suggestionsEl.classList.add('hidden');
@@ -1038,11 +1026,11 @@ function setupAutocomplete(inputEl, suggestionsEl, getMatches, renderLabel, onSe
   });
 }
 
-const cidadeInput      = document.getElementById('cl-city');
-const citySuggestions  = document.getElementById('cl-suggestions');
-const mesInput         = document.getElementById('cl-month');
-const mesSuggestions   = document.getElementById('cl-month-suggestions');
-const nomesDosMeses    = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+const cidadeInput     = document.getElementById('cl-city');
+const citySuggestions = document.getElementById('cl-suggestions');
+const mesInput        = document.getElementById('cl-month');
+const mesSuggestions  = document.getElementById('cl-month-suggestions');
+const nomesDosMeses   = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 
 setupAutocomplete(
   cidadeInput,
@@ -1059,9 +1047,6 @@ setupAutocomplete(
   m => m,
   m => { mesInput.value = m; mesInput.dataset.key = m; }
 );
-
-
-// ─── Calculadora de clima ────────────────────────────────────────────────
 
 function calcClima() {
   const key = cidadeInput.dataset.key;
@@ -1089,11 +1074,6 @@ function calcClima() {
     </div>`;
 }
 
-document.getElementById('btn-clima').addEventListener('click', calcClima);
-
-
-// ─── Enter para calcular nas outras abas ────────────────────────────────
-
 document.querySelectorAll('.form-card input:not(#cl-city):not(#cl-month)').forEach(input => {
   input.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter') return;
@@ -1103,8 +1083,10 @@ document.querySelectorAll('.form-card input:not(#cl-city):not(#cl-month)').forEa
     if (btn) btn.click();
   });
 });
+
 document.getElementById('btn-idade').addEventListener('click', calcIdade);
 document.getElementById('btn-diff').addEventListener('click', calcDiff);
 document.getElementById('btn-countdown').addEventListener('click', calcCountdown);
 document.getElementById('btn-horas').addEventListener('click', calcHoras);
 document.getElementById('btn-semana').addEventListener('click', calcSemana);
+document.getElementById('btn-clima').addEventListener('click', calcClima);
