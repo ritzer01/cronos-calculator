@@ -603,3 +603,46 @@ footer {
     text-align: center;
   }
 }
+
+/* ─── Autocomplete de cidade ─────────────────────────────────────────── */
+
+.autocomplete-wrap {
+  position: relative;
+}
+
+.suggestions-box {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 50;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.suggestions-box.hidden { display: none; }
+
+.suggestion-item {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  color: var(--text2);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.suggestion-empty {
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  color: var(--text3);
+  font-style: italic;
+}
