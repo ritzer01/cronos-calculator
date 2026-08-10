@@ -721,6 +721,40 @@ const climaData = {
       { mes: "Novembro",  maxima: 25, minima: 17, ceu: "ensolarado", chuva: "seco" },
       { mes: "Dezembro",  maxima: 21, minima: 13, ceu: "ensolarado", chuva: "seco" }
     ]
+  },
+  "sao goncalo": {
+    nome: "São Gonçalo, Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 30, minima: 23, ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Fevereiro", maxima: 31, minima: 24, ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Março",     maxima: 30, minima: 23, ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 28, minima: 21, ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Maio",      maxima: 26, minima: 19, ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Junho",     maxima: 25, minima: 17, ceu: "ensolarado", chuva: "seco" },
+      { mes: "Julho",     maxima: 25, minima: 17, ceu: "ensolarado", chuva: "seco" },
+      { mes: "Agosto",    maxima: 25, minima: 18, ceu: "ensolarado", chuva: "seco" },
+      { mes: "Setembro",  maxima: 25, minima: 18, ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Outubro",   maxima: 26, minima: 19, ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 27, minima: 20, ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Dezembro",  maxima: 29, minima: 22, ceu: "ensolarado", chuva: "chuva moderada" }
+    ]
+  },
+  "niteroi": {
+    nome: "Niterói, Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 29, minima: 23, ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Fevereiro", maxima: 30, minima: 24, ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Março",     maxima: 29, minima: 23, ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 27, minima: 21, ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Maio",      maxima: 25, minima: 19, ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Junho",     maxima: 24, minima: 18, ceu: "ensolarado", chuva: "seco" },
+      { mes: "Julho",     maxima: 24, minima: 17, ceu: "ensolarado", chuva: "seco" },
+      { mes: "Agosto",    maxima: 24, minima: 18, ceu: "ensolarado", chuva: "seco" },
+      { mes: "Setembro",  maxima: 24, minima: 18, ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Outubro",   maxima: 25, minima: 19, ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 26, minima: 20, ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Dezembro",  maxima: 28, minima: 22, ceu: "ensolarado", chuva: "chuva moderada" }
+    ]
   }
 };
 
