@@ -755,6 +755,533 @@ const climaData = {
       { mes: "Novembro",  maxima: 26, minima: 20, ceu: "parcialmente nublado", chuva: "chuva moderada" },
       { mes: "Dezembro",  maxima: 28, minima: 22, ceu: "ensolarado", chuva: "chuva moderada" }
     ]
+  },
+  "edimburgo": {
+    nome: "Edimburgo, Escócia (Reino Unido)",
+    meses: [
+      { mes: "Janeiro",   maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Fevereiro", maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva leve" },
+      { mes: "Março",     maxima: 10,  minima: 2,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Abril",     maxima: 12,  minima: 4,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Maio",      maxima: 15,  minima: 7,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Junho",     maxima: 18,  minima: 10,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Julho",     maxima: 19,  minima: 12,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 19,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 17,  minima: 10,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 13,  minima: 7,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 9,   minima: 3,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Dezembro",  maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva moderada" }
+    ]
+  },
+  "glasgow": {
+    nome: "Glasgow, Escócia (Reino Unido)",
+    meses: [
+      { mes: "Janeiro",   maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Fevereiro", maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Março",     maxima: 9,   minima: 2,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 12,  minima: 4,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 16,  minima: 6,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Junho",     maxima: 18,  minima: 9,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Julho",     maxima: 19,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 19,  minima: 11,  ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 16,  minima: 9,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 13,  minima: 6,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Novembro",  maxima: 9,   minima: 3,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Dezembro",  maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva forte" }
+    ]
+  },
+  "inverness": {
+    nome: "Inverness (Terras Altas), Escócia (Reino Unido)",
+    meses: [
+      { mes: "Janeiro",   maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Fevereiro", maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva leve" },
+      { mes: "Março",     maxima: 9,   minima: 2,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Abril",     maxima: 11,  minima: 4,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Maio",      maxima: 14,  minima: 6,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Junho",     maxima: 17,  minima: 9,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Julho",     maxima: 19,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 18,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 16,  minima: 9,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 12,  minima: 6,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 9,   minima: 3,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Dezembro",  maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva moderada" }
+    ]
+  },
+  "aberdeen": {
+    nome: "Aberdeen, Escócia (Reino Unido)",
+    meses: [
+      { mes: "Janeiro",   maxima: 6,   minima: 1,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Fevereiro", maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva leve" },
+      { mes: "Março",     maxima: 9,   minima: 2,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Abril",     maxima: 11,  minima: 4,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Maio",      maxima: 13,  minima: 6,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Junho",     maxima: 16,  minima: 9,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Julho",     maxima: 18,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 18,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 16,  minima: 9,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 13,  minima: 6,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 9,   minima: 3,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Dezembro",  maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva moderada" }
+    ]
+  },
+  "cardiff": {
+    nome: "Cardiff, País de Gales (Reino Unido)",
+    meses: [
+      { mes: "Janeiro",   maxima: 8,   minima: 3,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Fevereiro", maxima: 9,   minima: 3,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Março",     maxima: 11,  minima: 4,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 14,  minima: 6,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 17,  minima: 9,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Junho",     maxima: 20,  minima: 12,  ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Julho",     maxima: 21,  minima: 13,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 21,  minima: 13,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 19,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 15,  minima: 9,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Novembro",  maxima: 11,  minima: 5,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Dezembro",  maxima: 9,   minima: 3,   ceu: "nublado", chuva: "chuva forte" }
+    ]
+  },
+  "swansea": {
+    nome: "Swansea, País de Gales (Reino Unido)",
+    meses: [
+      { mes: "Janeiro",   maxima: 8,   minima: 4,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Fevereiro", maxima: 8,   minima: 3,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Março",     maxima: 10,  minima: 4,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 13,  minima: 6,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 16,  minima: 9,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Junho",     maxima: 18,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Julho",     maxima: 20,  minima: 13,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 20,  minima: 13,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 18,  minima: 12,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 15,  minima: 9,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Novembro",  maxima: 11,  minima: 6,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Dezembro",  maxima: 9,   minima: 4,   ceu: "nublado", chuva: "chuva forte" }
+    ]
+  },
+  "vancouver": {
+    nome: "Vancouver, Canadá",
+    meses: [
+      { mes: "Janeiro",   maxima: 7,   minima: 1,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Fevereiro", maxima: 8,   minima: 1,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Março",     maxima: 10,  minima: 3,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 13,  minima: 5,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 17,  minima: 8,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Junho",     maxima: 19,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Julho",     maxima: 22,  minima: 13,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Agosto",    maxima: 22,  minima: 13,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Setembro",  maxima: 19,  minima: 10,  ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Outubro",   maxima: 13,  minima: 6,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 9,   minima: 3,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Dezembro",  maxima: 6,   minima: 1,   ceu: "nublado", chuva: "chuva forte" }
+    ]
+  },
+  "montreal": {
+    nome: "Montreal, Canadá",
+    meses: [
+      { mes: "Janeiro",   maxima: -5,  minima: -13, ceu: "nublado", chuva: "neve" },
+      { mes: "Fevereiro", maxima: -3,  minima: -11, ceu: "nublado", chuva: "neve" },
+      { mes: "Março",     maxima: 3,   minima: -5,  ceu: "parcialmente nublado", chuva: "chuva e neve" },
+      { mes: "Abril",     maxima: 11,  minima: 2,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 19,  minima: 9,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Junho",     maxima: 24,  minima: 14,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Julho",     maxima: 26,  minima: 17,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 25,  minima: 16,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 20,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 13,  minima: 5,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 5,   minima: -1,  ceu: "nublado", chuva: "chuva e neve" },
+      { mes: "Dezembro",  maxima: -2,  minima: -9,  ceu: "nublado", chuva: "neve" }
+    ]
+  },
+  "quebec": {
+    nome: "Quebec (cidade), Canadá",
+    meses: [
+      { mes: "Janeiro",   maxima: -8,  minima: -18, ceu: "nublado", chuva: "neve" },
+      { mes: "Fevereiro", maxima: -6,  minima: -16, ceu: "nublado", chuva: "neve" },
+      { mes: "Março",     maxima: 0,   minima: -9,  ceu: "parcialmente nublado", chuva: "neve" },
+      { mes: "Abril",     maxima: 8,   minima: -1,  ceu: "parcialmente nublado", chuva: "chuva e neve" },
+      { mes: "Maio",      maxima: 17,  minima: 5,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Junho",     maxima: 22,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Julho",     maxima: 25,  minima: 14,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 24,  minima: 13,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 18,  minima: 8,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 11,  minima: 2,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 3,   minima: -4,  ceu: "nublado", chuva: "chuva e neve" },
+      { mes: "Dezembro",  maxima: -4,  minima: -13, ceu: "nublado", chuva: "neve" }
+    ]
+  },
+  "ottawa": {
+    nome: "Ottawa, Canadá",
+    meses: [
+      { mes: "Janeiro",   maxima: -6,  minima: -15, ceu: "nublado", chuva: "neve" },
+      { mes: "Fevereiro", maxima: -4,  minima: -13, ceu: "nublado", chuva: "neve" },
+      { mes: "Março",     maxima: 2,   minima: -7,  ceu: "parcialmente nublado", chuva: "chuva e neve" },
+      { mes: "Abril",     maxima: 11,  minima: 1,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 19,  minima: 7,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Junho",     maxima: 24,  minima: 13,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Julho",     maxima: 27,  minima: 15,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 25,  minima: 14,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 20,  minima: 10,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 13,  minima: 3,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 5,   minima: -2,  ceu: "nublado", chuva: "chuva e neve" },
+      { mes: "Dezembro",  maxima: -3,  minima: -11, ceu: "nublado", chuva: "neve" }
+    ]
+  },
+  "calgary": {
+    nome: "Calgary, Canadá",
+    meses: [
+      { mes: "Janeiro",   maxima: -1,  minima: -13, ceu: "ensolarado", chuva: "neve" },
+      { mes: "Fevereiro", maxima: 0,   minima: -12, ceu: "ensolarado", chuva: "neve" },
+      { mes: "Março",     maxima: 4,   minima: -8,  ceu: "parcialmente nublado", chuva: "neve" },
+      { mes: "Abril",     maxima: 11,  minima: -2,  ceu: "parcialmente nublado", chuva: "chuva e neve" },
+      { mes: "Maio",      maxima: 16,  minima: 3,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Junho",     maxima: 20,  minima: 8,   ceu: "parcialmente nublado", chuva: "chuva forte" },
+      { mes: "Julho",     maxima: 23,  minima: 10,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 23,  minima: 9,   ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Setembro",  maxima: 18,  minima: 4,   ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Outubro",   maxima: 11,  minima: -2,  ceu: "ensolarado", chuva: "neve" },
+      { mes: "Novembro",  maxima: 3,   minima: -9,  ceu: "parcialmente nublado", chuva: "neve" },
+      { mes: "Dezembro",  maxima: -1,  minima: -13, ceu: "ensolarado", chuva: "neve" }
+    ]
+  },
+  "cancun": {
+    nome: "Cancún, México",
+    meses: [
+      { mes: "Janeiro",   maxima: 28,  minima: 19,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Fevereiro", maxima: 28,  minima: 19,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Março",     maxima: 30,  minima: 21,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Abril",     maxima: 31,  minima: 22,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Maio",      maxima: 32,  minima: 24,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Junho",     maxima: 32,  minima: 25,  ceu: "parcialmente nublado", chuva: "chuva forte" },
+      { mes: "Julho",     maxima: 33,  minima: 25,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 33,  minima: 25,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 32,  minima: 24,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Outubro",   maxima: 31,  minima: 23,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Novembro",  maxima: 29,  minima: 21,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Dezembro",  maxima: 28,  minima: 19,  ceu: "ensolarado", chuva: "chuva leve" }
+    ]
+  },
+  "guadalajara": {
+    nome: "Guadalajara, México",
+    meses: [
+      { mes: "Janeiro",   maxima: 25,  minima: 7,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Fevereiro", maxima: 27,  minima: 8,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Março",     maxima: 29,  minima: 10,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Abril",     maxima: 31,  minima: 12,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Maio",      maxima: 32,  minima: 15,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Junho",     maxima: 30,  minima: 17,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Julho",     maxima: 27,  minima: 16,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Agosto",    maxima: 27,  minima: 16,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Setembro",  maxima: 27,  minima: 16,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 27,  minima: 13,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Novembro",  maxima: 26,  minima: 10,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Dezembro",  maxima: 25,  minima: 8,   ceu: "ensolarado", chuva: "seco" }
+    ]
+  },
+  "monterrey": {
+    nome: "Monterrey, México",
+    meses: [
+      { mes: "Janeiro",   maxima: 20,  minima: 8,   ceu: "parcialmente nublado", chuva: "seco" },
+      { mes: "Fevereiro", maxima: 23,  minima: 10,  ceu: "parcialmente nublado", chuva: "seco" },
+      { mes: "Março",     maxima: 27,  minima: 13,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Abril",     maxima: 30,  minima: 17,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Maio",      maxima: 32,  minima: 20,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Junho",     maxima: 34,  minima: 22,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Julho",     maxima: 35,  minima: 22,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Agosto",    maxima: 35,  minima: 22,  ceu: "ensolarado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 31,  minima: 21,  ceu: "parcialmente nublado", chuva: "chuva forte" },
+      { mes: "Outubro",   maxima: 27,  minima: 17,  ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Novembro",  maxima: 24,  minima: 12,  ceu: "parcialmente nublado", chuva: "seco" },
+      { mes: "Dezembro",  maxima: 21,  minima: 9,   ceu: "parcialmente nublado", chuva: "seco" }
+    ]
+  },
+  "cordoba": {
+    nome: "Córdoba, Argentina",
+    meses: [
+      { mes: "Janeiro",   maxima: 31,  minima: 17,  ceu: "parcialmente nublado", chuva: "chuva forte" },
+      { mes: "Fevereiro", maxima: 30,  minima: 16,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Março",     maxima: 28,  minima: 15,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 25,  minima: 11,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Maio",      maxima: 22,  minima: 7,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Junho",     maxima: 19,  minima: 4,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Julho",     maxima: 19,  minima: 3,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Agosto",    maxima: 21,  minima: 4,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Setembro",  maxima: 24,  minima: 8,   ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Outubro",   maxima: 26,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 29,  minima: 14,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Dezembro",  maxima: 30,  minima: 16,  ceu: "parcialmente nublado", chuva: "chuva forte" }
+    ]
+  },
+  "mendoza": {
+    nome: "Mendoza, Argentina",
+    meses: [
+      { mes: "Janeiro",   maxima: 32,  minima: 19,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Fevereiro", maxima: 30,  minima: 17,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Março",     maxima: 27,  minima: 15,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Abril",     maxima: 23,  minima: 10,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Maio",      maxima: 19,  minima: 6,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Junho",     maxima: 15,  minima: 3,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Julho",     maxima: 15,  minima: 2,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Agosto",    maxima: 18,  minima: 4,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Setembro",  maxima: 21,  minima: 7,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Outubro",   maxima: 25,  minima: 11,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Novembro",  maxima: 29,  minima: 15,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Dezembro",  maxima: 31,  minima: 18,  ceu: "ensolarado", chuva: "chuva leve" }
+    ]
+  },
+  "bariloche": {
+    nome: "San Carlos de Bariloche, Argentina",
+    meses: [
+      { mes: "Janeiro",   maxima: 22,  minima: 6,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Fevereiro", maxima: 22,  minima: 6,   ceu: "ensolarado", chuva: "seco" },
+      { mes: "Março",     maxima: 18,  minima: 4,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Abril",     maxima: 14,  minima: 2,   ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 10,  minima: 0,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Junho",     maxima: 7,   minima: -1,  ceu: "nublado", chuva: "chuva e neve" },
+      { mes: "Julho",     maxima: 6,   minima: -2,  ceu: "nublado", chuva: "chuva e neve" },
+      { mes: "Agosto",    maxima: 8,   minima: -2,  ceu: "parcialmente nublado", chuva: "chuva e neve" },
+      { mes: "Setembro",  maxima: 11,  minima: -1,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 14,  minima: 1,   ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Novembro",  maxima: 18,  minima: 3,   ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Dezembro",  maxima: 20,  minima: 5,   ceu: "ensolarado", chuva: "seco" }
+    ]
+  },
+  "ushuaia": {
+    nome: "Ushuaia (Terra do Fogo), Argentina",
+    meses: [
+      { mes: "Janeiro",   maxima: 14,  minima: 5,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Fevereiro", maxima: 14,  minima: 5,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Março",     maxima: 12,  minima: 3,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 9,   minima: 1,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 6,   minima: -1,  ceu: "nublado", chuva: "chuva e neve" },
+      { mes: "Junho",     maxima: 4,   minima: -3,  ceu: "nublado", chuva: "neve" },
+      { mes: "Julho",     maxima: 4,   minima: -3,  ceu: "nublado", chuva: "neve" },
+      { mes: "Agosto",    maxima: 5,   minima: -2,  ceu: "nublado", chuva: "neve" },
+      { mes: "Setembro",  maxima: 8,   minima: 0,   ceu: "nublado", chuva: "chuva e neve" },
+      { mes: "Outubro",   maxima: 10,  minima: 1,   ceu: "nublado", chuva: "chuva leve" },
+      { mes: "Novembro",  maxima: 12,  minima: 3,   ceu: "nublado", chuva: "chuva leve" },
+      { mes: "Dezembro",  maxima: 13,  minima: 4,   ceu: "nublado", chuva: "chuva moderada" }
+    ]
+  },
+  "salvador": {
+    nome: "Salvador, Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 30,  minima: 24,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Fevereiro", maxima: 30,  minima: 24,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Março",     maxima: 30,  minima: 24,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 29,  minima: 24,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Maio",      maxima: 28,  minima: 23,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Junho",     maxima: 27,  minima: 22,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Julho",     maxima: 26,  minima: 21,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 27,  minima: 21,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 27,  minima: 22,  ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Outubro",   maxima: 28,  minima: 23,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Novembro",  maxima: 29,  minima: 23,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Dezembro",  maxima: 30,  minima: 24,  ceu: "ensolarado", chuva: "chuva leve" }
+    ]
+  },
+  "recife": {
+    nome: "Recife, Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 31,  minima: 25,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Fevereiro", maxima: 31,  minima: 25,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Março",     maxima: 31,  minima: 25,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 30,  minima: 24,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Maio",      maxima: 29,  minima: 23,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Junho",     maxima: 28,  minima: 22,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Julho",     maxima: 27,  minima: 21,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Agosto",    maxima: 28,  minima: 21,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 29,  minima: 22,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Outubro",   maxima: 30,  minima: 23,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Novembro",  maxima: 30,  minima: 24,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Dezembro",  maxima: 31,  minima: 24,  ceu: "ensolarado", chuva: "chuva leve" }
+    ]
+  },
+  "fortaleza": {
+    nome: "Fortaleza, Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 31,  minima: 24,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Fevereiro", maxima: 31,  minima: 24,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Março",     maxima: 30,  minima: 24,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Abril",     maxima: 30,  minima: 24,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Maio",      maxima: 30,  minima: 24,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Junho",     maxima: 30,  minima: 23,  ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Julho",     maxima: 30,  minima: 23,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Agosto",    maxima: 30,  minima: 23,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Setembro",  maxima: 31,  minima: 24,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Outubro",   maxima: 31,  minima: 24,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Novembro",  maxima: 31,  minima: 25,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Dezembro",  maxima: 31,  minima: 25,  ceu: "ensolarado", chuva: "seco" }
+    ]
+  },
+  "natal": {
+    nome: "Natal, Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 30,  minima: 24,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Fevereiro", maxima: 30,  minima: 24,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Março",     maxima: 30,  minima: 24,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 30,  minima: 23,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Maio",      maxima: 29,  minima: 23,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Junho",     maxima: 28,  minima: 22,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Julho",     maxima: 28,  minima: 21,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 28,  minima: 21,  ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Setembro",  maxima: 29,  minima: 22,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Outubro",   maxima: 30,  minima: 23,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Novembro",  maxima: 30,  minima: 23,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Dezembro",  maxima: 30,  minima: 24,  ceu: "ensolarado", chuva: "seco" }
+    ]
+  },
+  "belem": {
+    nome: "Belém, Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 31,  minima: 23,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Fevereiro", maxima: 31,  minima: 23,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Março",     maxima: 31,  minima: 23,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Abril",     maxima: 31,  minima: 23,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Maio",      maxima: 32,  minima: 23,  ceu: "parcialmente nublado", chuva: "chuva forte" },
+      { mes: "Junho",     maxima: 32,  minima: 23,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Julho",     maxima: 32,  minima: 22,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 33,  minima: 22,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Setembro",  maxima: 33,  minima: 22,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Outubro",   maxima: 33,  minima: 22,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Novembro",  maxima: 33,  minima: 23,  ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Dezembro",  maxima: 32,  minima: 23,  ceu: "parcialmente nublado", chuva: "chuva moderada" }
+    ]
+  },
+  "brasilia": {
+    nome: "Brasília, Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 27,  minima: 18,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Fevereiro", maxima: 27,  minima: 18,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Março",     maxima: 27,  minima: 18,  ceu: "parcialmente nublado", chuva: "chuva forte" },
+      { mes: "Abril",     maxima: 27,  minima: 17,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 26,  minima: 15,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Junho",     maxima: 25,  minima: 13,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Julho",     maxima: 25,  minima: 13,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Agosto",    maxima: 27,  minima: 14,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Setembro",  maxima: 29,  minima: 16,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Outubro",   maxima: 29,  minima: 18,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 27,  minima: 18,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Dezembro",  maxima: 27,  minima: 18,  ceu: "chuvoso", chuva: "chuva forte" }
+    ]
+  },
+  "belo horizonte": {
+    nome: "Belo Horizonte, Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 29,  minima: 19,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Fevereiro", maxima: 30,  minima: 19,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Março",     maxima: 29,  minima: 19,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 28,  minima: 17,  ceu: "parcialmente nublado", chuva: "chuva leve" },
+      { mes: "Maio",      maxima: 26,  minima: 15,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Junho",     maxima: 25,  minima: 13,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Julho",     maxima: 25,  minima: 13,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Agosto",    maxima: 26,  minima: 14,  ceu: "ensolarado", chuva: "seco" },
+      { mes: "Setembro",  maxima: 28,  minima: 16,  ceu: "ensolarado", chuva: "chuva leve" },
+      { mes: "Outubro",   maxima: 28,  minima: 18,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 28,  minima: 18,  ceu: "chuvoso", chuva: "chuva forte" },
+      { mes: "Dezembro",  maxima: 28,  minima: 19,  ceu: "chuvoso", chuva: "chuva forte" }
+    ]
+  },
+  "florianopolis": {
+    nome: "Florianópolis, Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 29,  minima: 22,  ceu: "parcialmente nublado", chuva: "chuva forte" },
+      { mes: "Fevereiro", maxima: 29,  minima: 22,  ceu: "parcialmente nublado", chuva: "chuva forte" },
+      { mes: "Março",     maxima: 28,  minima: 21,  ceu: "parcialmente nublado", chuva: "chuva forte" },
+      { mes: "Abril",     maxima: 26,  minima: 19,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 24,  minima: 16,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Junho",     maxima: 22,  minima: 14,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Julho",     maxima: 21,  minima: 13,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 21,  minima: 14,  ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 22,  minima: 15,  ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Outubro",   maxima: 24,  minima: 17,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Novembro",  maxima: 26,  minima: 19,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Dezembro",  maxima: 28,  minima: 21,  ceu: "parcialmente nublado", chuva: "chuva moderada" }
+    ]
+  },
+  "gramado": {
+    nome: "Gramado (Serra Gaúcha), Brasil",
+    meses: [
+      { mes: "Janeiro",   maxima: 25,  minima: 15,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Fevereiro", maxima: 25,  minima: 15,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Março",     maxima: 23,  minima: 14,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Abril",     maxima: 20,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Maio",      maxima: 17,  minima: 8,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Junho",     maxima: 15,  minima: 6,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Julho",     maxima: 14,  minima: 6,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Agosto",    maxima: 16,  minima: 7,   ceu: "nublado", chuva: "chuva moderada" },
+      { mes: "Setembro",  maxima: 17,  minima: 8,   ceu: "nublado", chuva: "chuva forte" },
+      { mes: "Outubro",   maxima: 20,  minima: 11,  ceu: "parcialmente nublado", chuva: "chuva forte" },
+      { mes: "Novembro",  maxima: 22,  minima: 12,  ceu: "parcialmente nublado", chuva: "chuva moderada" },
+      { mes: "Dezembro",  maxima: 24,  minima: 14,  ceu: "parcialmente nublado", chuva: "chuva moderada" }
+    ]
+  },
+  "antartida": {
+    nome: "Antártida (Estação McMurdo)",
+    meses: [
+      { mes: "Janeiro",   maxima: 0,   minima: -5,  ceu: "ensolarado o dia inteiro (sol da meia-noite)", chuva: "neve" },
+      { mes: "Fevereiro", maxima: -4,  minima: -10, ceu: "parcialmente nublado", chuva: "neve" },
+      { mes: "Março",     maxima: -11, minima: -18, ceu: "nublado, com o sol se pondo", chuva: "neve" },
+      { mes: "Abril",     maxima: -15, minima: -22, ceu: "escuro (noite polar)", chuva: "neve" },
+      { mes: "Maio",      maxima: -16, minima: -24, ceu: "escuro (noite polar)", chuva: "neve" },
+      { mes: "Junho",     maxima: -16, minima: -24, ceu: "escuro (noite polar)", chuva: "neve" },
+      { mes: "Julho",     maxima: -18, minima: -27, ceu: "escuro (noite polar)", chuva: "neve" },
+      { mes: "Agosto",    maxima: -19, minima: -27, ceu: "escuro, com o sol voltando", chuva: "neve" },
+      { mes: "Setembro",  maxima: -17, minima: -25, ceu: "nublado", chuva: "neve" },
+      { mes: "Outubro",   maxima: -13, minima: -20, ceu: "parcialmente nublado", chuva: "neve" },
+      { mes: "Novembro",  maxima: -5,  minima: -12, ceu: "ensolarado quase o dia inteiro", chuva: "neve" },
+      { mes: "Dezembro",  maxima: 0,   minima: -5,  ceu: "ensolarado o dia inteiro (sol da meia-noite)", chuva: "neve" }
+    ]
+  },
+  "artico": {
+    nome: "Ártico (Longyearbyen, Svalbard)",
+    meses: [
+      { mes: "Janeiro",   maxima: -13, minima: -20, ceu: "escuro (noite polar)", chuva: "neve" },
+      { mes: "Fevereiro", maxima: -13, minima: -20, ceu: "escuro, com o sol voltando", chuva: "neve" },
+      { mes: "Março",     maxima: -13, minima: -20, ceu: "parcialmente nublado", chuva: "neve" },
+      { mes: "Abril",     maxima: -9,  minima: -16, ceu: "ensolarado quase o dia inteiro", chuva: "neve" },
+      { mes: "Maio",      maxima: -2,  minima: -7,  ceu: "ensolarado o dia inteiro (sol da meia-noite)", chuva: "chuva e neve" },
+      { mes: "Junho",     maxima: 4,   minima: 0,   ceu: "ensolarado o dia inteiro (sol da meia-noite)", chuva: "chuva leve" },
+      { mes: "Julho",     maxima: 8,   minima: 4,   ceu: "ensolarado o dia inteiro (sol da meia-noite)", chuva: "chuva leve" },
+      { mes: "Agosto",    maxima: 6,   minima: 3,   ceu: "nublado", chuva: "chuva leve" },
+      { mes: "Setembro",  maxima: 1,   minima: -2,  ceu: "nublado", chuva: "chuva e neve" },
+      { mes: "Outubro",   maxima: -4,  minima: -9,  ceu: "parcialmente nublado", chuva: "neve" },
+      { mes: "Novembro",  maxima: -8,  minima: -14, ceu: "escuro (noite polar)", chuva: "neve" },
+      { mes: "Dezembro",  maxima: -11, minima: -17, ceu: "escuro (noite polar)", chuva: "neve" }
+    ]
+  },
+  "carcosa": {
+    nome: "Carcosa, às margens do Lago de Hali",
+    meses: [
+      { mes: "Janeiro",   maxima: 13,  minima: 6,   ceu: "de estrelas negras", chuva: "névoa sobre o Lago de Hali" },
+      { mes: "Fevereiro", maxima: 12,  minima: 5,   ceu: "com duas luas girando", chuva: "nuvens que se desfazem no lago" },
+      { mes: "Março",     maxima: 13,  minima: 6,   ceu: "com sóis gêmeos afundando no lago", chuva: "as sombras se alongam à tarde" },
+      { mes: "Abril",     maxima: 11,  minima: 4,   ceu: "de estrelas negras", chuva: "névoa sobre o Lago de Hali" },
+      { mes: "Maio",      maxima: 12,  minima: 5,   ceu: "com as Híades no alto", chuva: "canção das Híades no vento" },
+      { mes: "Junho",     maxima: 13,  minima: 6,   ceu: "amarelo e imóvel", chuva: "nuvens que se desfazem no lago" },
+      { mes: "Julho",     maxima: 13,  minima: 6,   ceu: "de estrelas negras", chuva: "névoa sobre o Lago de Hali" },
+      { mes: "Agosto",    maxima: 12,  minima: 5,   ceu: "com sóis gêmeos afundando no lago", chuva: "as sombras se alongam à tarde" },
+      { mes: "Setembro",  maxima: 11,  minima: 4,   ceu: "com duas luas girando", chuva: "canção das Híades no vento" },
+      { mes: "Outubro",   maxima: 10,  minima: 3,   ceu: "de estrelas negras", chuva: "névoa sobre o Lago de Hali" },
+      { mes: "Novembro",  maxima: 9,   minima: 2,   ceu: "com Aldebarã no alto", chuva: "o Rei de Amarelo tirou a máscara?" },
+      { mes: "Dezembro",  maxima: 13,  minima: 6,   ceu: "amarelo e imóvel", chuva: "não há máscara" }
+    ]
+  },
+  "estrela da morte": {
+    nome: "Estrela da Morte, Império Galáctico",
+    meses: [
+      { mes: "Janeiro",   maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" },
+      { mes: "Fevereiro", maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" },
+      { mes: "Março",     maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" },
+      { mes: "Abril",     maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" },
+      { mes: "Maio",      maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "que a Força esteja com você" },
+      { mes: "Junho",     maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" },
+      { mes: "Julho",     maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" },
+      { mes: "Agosto",    maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" },
+      { mes: "Setembro",  maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" },
+      { mes: "Outubro",   maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" },
+      { mes: "Novembro",  maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" },
+      { mes: "Dezembro",  maxima: 21,  minima: 19,  ceu: "de aço (climatizado pelo Império)", chuva: "sem chuva, só disparos de blaster" }
+    ]
   }
 };
 
@@ -1198,7 +1725,26 @@ const cidadeApelidos = {
   "sicilia":     ["palermo"],
   "washington":  ["washington dc"],
   "cidade do mexico": ["mexico"],
-  "amsterdam":   ["amsterda"]
+  "amsterdam":   ["amsterda"],
+  "edimburgo": ["edinburgh"],
+  "inverness": ["highlands", "terras altas", "lago ness", "loch ness"],
+  "cardiff": ["gales", "pais de gales", "wales"],
+  "swansea": ["gales", "pais de gales", "wales"],
+  "calgary": ["rochosas", "banff"],
+  "cancun": ["riviera maya"],
+  "bariloche": ["patagonia"],
+  "ushuaia": ["terra do fogo", "fim do mundo"],
+  "salvador": ["bahia"],
+  "recife": ["pernambuco"],
+  "fortaleza": ["ceara"],
+  "brasilia": ["distrito federal", "df"],
+  "belo horizonte": ["bh", "minas gerais"],
+  "florianopolis": ["floripa", "santa catarina"],
+  "gramado": ["serra gaucha", "canela"],
+  "antartida": ["antartica", "polo sul", "mcmurdo"],
+  "artico": ["polo norte", "svalbard", "longyearbyen"],
+  "carcosa": ["rei de amarelo", "rei amarelo", "lago de hali", "hali", "king in yellow"],
+  "estrela da morte": ["death star", "imperio", "darth vader", "vader"]
 };
 
 // Termos pesquisáveis de cada cidade: chave, nome exibido e apelidos, sem acentos.
@@ -1261,8 +1807,7 @@ function calcClima() {
     <div class="countdown-display">
       <p class="countdown-label-name">${escapeHTML(cidade.nome)} — ${escapeHTML(mes)}</p>
       <div class="countdown-big" style="font-size: clamp(2.4rem, 7vw, 4rem);">${dadosMes.maxima} °C / ${dadosMes.minima} °C</div>
-      <div class="countdown-unit">máxima / mínima médias &nbsp;·&nbsp; média de ${media} °C</div>
-      <div class="countdown-unit">céu ${escapeHTML(dadosMes.ceu)} &nbsp;·&nbsp; ${escapeHTML(dadosMes.chuva)}</div>
+      <div class="countdown-unit">média de ${media} °C &nbsp;·&nbsp; céu ${escapeHTML(dadosMes.ceu)} &nbsp;·&nbsp; ${escapeHTML(dadosMes.chuva)}</div>
     </div>`);
 }
 
