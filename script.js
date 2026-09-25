@@ -779,30 +779,152 @@ function fmtDate(d) {
   return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
 }
 
-function diffDates(a, b) {
-  let years  = b.getFullYear() - a.getFullYear();
-  let months = b.getMonth()    - a.getMonth();
-  let days   = b.getDate()     - a.getDate();
+function plural(n, singular, pluralForm) {
+  return Math.abs(n) === 1 ? singular : pluralForm;
+}
 
-  if (days < 0) {
-    months--;
-    days += new Date(b.getFullYear(), b.getMonth(), 0).getDate();
+// Lê uma data digitada como "dd/mm/aaaa" e devolve um Date local ao meio-dia
+// (o meio-dia evita meias-noites inexistentes em dias de mudança de horário).
+// Retorna null se não for uma data de calendário válida.
+function parseDateInput(val) {
+  const m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(val.trim());
+  if (!m) return null;
+  const d = +m[1], mo = +m[2] - 1, y = +m[3];
+  if (mo < 0 || mo > 11 || d < 1 || d > daysInMonth(y, mo)) return null;
+  const date = new Date(2000, 0, 1, 12);
+  date.setFullYear(y, mo, d);
+  return date;
+}
+
+// Lê "dd/mm/aaaa hh:mm" e devolve o Date local correspondente, ou null se inválido.
+function parseDateTimeInput(val) {
+  const m = /^(\d{2}\/\d{2}\/\d{4}) (\d{2}):(\d{2})$/.exec(val.trim());
+  if (!m) return null;
+  const day = parseDateInput(m[1]);
+  const h = +m[2], mi = +m[3];
+  if (!day || h > 23 || mi > 59) return null;
+  day.setHours(h, mi, 0, 0);
+  return day;
+}
+
+// Máscara de digitação: o usuário digita só números e as barras, o espaço e os
+// dois-pontos aparecem sozinhos (dd/mm/aaaa ou dd/mm/aaaa hh:mm).
+function formatDateDigits(digits, withTime) {
+  const seps = withTime ? ['/', '/', ' ', ':'] : ['/', '/'];
+  const sizes = withTime ? [2, 2, 4, 2, 2] : [2, 2, 4];
+  let out = '', pos = 0;
+  for (let i = 0; i < sizes.length && pos < digits.length; i++) {
+    if (i > 0) out += seps[i - 1];
+    out += digits.slice(pos, pos + sizes[i]);
+    pos += sizes[i];
   }
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
-  return { years, months, days };
+  return out;
+}
+
+function setupDateMask(input) {
+  const withTime = input.dataset.mask === 'datetime';
+  const maxDigits = withTime ? 12 : 8;
+
+  input.addEventListener('input', () => {
+    let raw = input.value;
+    // Colar no formato "aaaa-mm-dd" (ou "aaaa-mm-ddThh:mm") também funciona
+    const iso = /^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2}))?/.exec(raw.trim());
+    if (iso) raw = iso[3] + iso[2] + iso[1] + (withTime && iso[4] ? iso[4] + iso[5] : '');
+
+    const caret = input.selectionStart == null ? raw.length : input.selectionStart;
+    const digitsBeforeCaret = raw.slice(0, caret).replace(/\D/g, '').length;
+    const digits = raw.replace(/\D/g, '').slice(0, maxDigits);
+    const formatted = formatDateDigits(digits, withTime);
+    if (formatted === input.value) return;
+    input.value = formatted;
+
+    // Mantém o cursor depois do mesmo número de dígitos que antes
+    let newCaret = 0, seen = 0;
+    while (newCaret < formatted.length && seen < digitsBeforeCaret) {
+      if (/\d/.test(formatted[newCaret])) seen++;
+      newCaret++;
+    }
+    if (iso) newCaret = formatted.length;
+    try { input.setSelectionRange(newCaret, newCaret); } catch (_) {}
+  });
+}
+
+document.querySelectorAll('input[data-mask]').forEach(setupDateMask);
+
+// Número do dia no calendário (independente de fuso, horário de verão e horário histórico local).
+function dayNumber(y, m, d) {
+  const t = new Date(0);
+  t.setUTCFullYear(y, m, d);
+  return t.getTime() / 86400000;
+}
+
+function dayNumberOf(date) {
+  return dayNumber(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+function daysInMonth(y, m) {
+  return dayNumber(y, m + 1, 1) - dayNumber(y, m, 1);
+}
+
+// Data em que se completam `k` meses a partir de `a`. Se o dia não existe no mês
+// (ex.: 31/02 ou 29/02 em ano comum), o prazo se completa no dia 1 do mês seguinte
+// (Código Civil, art. 132, § 3º).
+function monthAnniversary(a, k) {
+  const total = a.getFullYear() * 12 + a.getMonth() + k;
+  const y = Math.floor(total / 12);
+  const m = total - y * 12;
+  const d = a.getDate();
+  return d <= daysInMonth(y, m) ? dayNumber(y, m, d) : dayNumber(y, m + 1, 1);
+}
+
+// Diferença de calendário entre a e b (a <= b) em anos, meses e dias completos.
+function diffDates(a, b) {
+  const end = dayNumberOf(b);
+  let k = (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth());
+  if (monthAnniversary(a, k) > end) k--;
+
+  return {
+    years:  Math.floor(k / 12),
+    months: k % 12,
+    days:   end - monthAnniversary(a, k)
+  };
 }
 
 function totalDays(a, b) {
-  return Math.floor((b - a) / 86400000);
+  return dayNumberOf(b) - dayNumberOf(a);
+}
+
+function todayLocal() {
+  const today = new Date();
+  today.setHours(12, 0, 0, 0);
+  return today;
+}
+
+// Rola a página só o necessário para o resultado ficar visível.
+function revealResult(el) {
+  requestAnimationFrame(() => {
+    const viewH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    const rect  = el.getBoundingClientRect();
+    const margin = 16;
+    // O cabeçalho fica fixo no topo; o resultado não deve parar escondido atrás dele
+    const header = document.querySelector('header');
+    const pos = header ? getComputedStyle(header).position : '';
+    const topLimit = (pos === 'sticky' || pos === 'fixed') ? header.getBoundingClientRect().bottom : 0;
+    if (rect.bottom <= viewH - margin && rect.top >= topLimit) return;
+    const delta = Math.min(rect.bottom - viewH + margin, rect.top - topLimit - margin);
+    if (delta > 0) window.scrollBy({ top: delta, behavior: 'smooth' });
+  });
+}
+
+function showResult(id, html) {
+  const el = document.getElementById(id);
+  el.classList.remove('hidden');
+  el.innerHTML = html;
+  revealResult(el);
 }
 
 function showError(id, msg) {
-  const el = document.getElementById(id);
-  el.classList.remove('hidden');
-  el.innerHTML = `<div class="error-msg">${msg}</div>`;
+  showResult(id, `<div class="error-msg">${escapeHTML(msg)}</div>`);
 }
 
 function metricCard(num, lbl, highlight = false) {
@@ -825,11 +947,11 @@ function calcIdade() {
   const val = document.getElementById('i-birth').value;
   if (!val) { showError('i-result', 'Informe uma data de nascimento.'); return; }
 
-  const birth = new Date(val + 'T00:00:00');
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const birth = parseDateInput(val);
+  if (!birth) { showError('i-result', 'Data de nascimento inválida. Use o formato dd/mm/aaaa.'); return; }
+  const today = todayLocal();
 
-  if (birth > today) { showError('i-result', 'A data de nascimento não pode ser no futuro.'); return; }
+  if (dayNumberOf(birth) > dayNumberOf(today)) { showError('i-result', 'A data de nascimento não pode ser no futuro.'); return; }
 
   const { years, months, days } = diffDates(birth, today);
   const td   = totalDays(birth, today);
@@ -837,23 +959,21 @@ function calcIdade() {
   const tm   = years * 12 + months;
   const th   = td * 24;
 
-  const el = document.getElementById('i-result');
-  el.classList.remove('hidden');
-  el.innerHTML = `
+  showResult('i-result', `
     <div class="metrics-grid">
-      ${metricCard(years,  'anos',  true)}
-      ${metricCard(months, 'meses')}
-      ${metricCard(days,   'dias')}
+      ${metricCard(years,  plural(years,  'ano', 'anos'),   true)}
+      ${metricCard(months, plural(months, 'mês', 'meses'))}
+      ${metricCard(days,   plural(days,   'dia', 'dias'))}
     </div>
     <div class="totals-bar">
       ${totalItem(td, 'dias no total')}
       <div class="totals-divider"></div>
-      ${totalItem(tw, 'semanas')}
+      ${totalItem(tw, plural(tw, 'semana', 'semanas'))}
       <div class="totals-divider"></div>
-      ${totalItem(tm, 'meses')}
+      ${totalItem(tm, plural(tm, 'mês', 'meses'))}
       <div class="totals-divider"></div>
-      ${totalItem(th, 'horas')}
-    </div>`;
+      ${totalItem(th, plural(th, 'hora', 'horas'))}
+    </div>`);
 }
 
 function calcDiff() {
@@ -861,9 +981,10 @@ function calcDiff() {
   const ev = document.getElementById('d-end').value;
   if (!sv || !ev) { showError('d-result', 'Informe as duas datas.'); return; }
 
-  let a = new Date(sv + 'T00:00:00');
-  let b = new Date(ev + 'T00:00:00');
-  const inverted = a > b;
+  let a = parseDateInput(sv);
+  let b = parseDateInput(ev);
+  if (!a || !b) { showError('d-result', 'Data inválida. Use o formato dd/mm/aaaa.'); return; }
+  const inverted = dayNumberOf(a) > dayNumberOf(b);
   if (inverted) [a, b] = [b, a];
 
   const { years, months, days } = diffDates(a, b);
@@ -871,22 +992,20 @@ function calcDiff() {
   const tw = Math.floor(td / 7);
   const tm = years * 12 + months;
 
-  const el = document.getElementById('d-result');
-  el.classList.remove('hidden');
-  el.innerHTML = `
+  showResult('d-result', `
     <div class="metrics-grid">
-      ${metricCard(years,  'anos',  true)}
-      ${metricCard(months, 'meses')}
-      ${metricCard(days,   'dias')}
+      ${metricCard(years,  plural(years,  'ano', 'anos'),   true)}
+      ${metricCard(months, plural(months, 'mês', 'meses'))}
+      ${metricCard(days,   plural(days,   'dia', 'dias'))}
     </div>
     <div class="totals-bar">
-      ${totalItem(td, 'dias')}
+      ${totalItem(td, plural(td, 'dia', 'dias'))}
       <div class="totals-divider"></div>
-      ${totalItem(tw, 'semanas')}
+      ${totalItem(tw, plural(tw, 'semana', 'semanas'))}
       <div class="totals-divider"></div>
-      ${totalItem(tm, 'meses completos')}
+      ${totalItem(tm, plural(tm, 'mês completo', 'meses completos'))}
       ${inverted ? '<span class="badge-past" style="margin-left:auto">ordem invertida</span>' : ''}
-    </div>`;
+    </div>`);
 }
 
 function calcCountdown() {
@@ -894,37 +1013,42 @@ function calcCountdown() {
   if (!val) { showError('c-result', 'Informe a data alvo.'); return; }
 
   const lbl    = document.getElementById('c-label').value.trim();
-  const target = new Date(val + 'T00:00:00');
-  const today  = new Date();
-  today.setHours(0, 0, 0, 0);
+  const target = parseDateInput(val);
+  if (!target) { showError('c-result', 'Data alvo inválida. Use o formato dd/mm/aaaa.'); return; }
+  const today  = todayLocal();
 
-  const isPast = target < today;
+  const isPast  = dayNumberOf(target) < dayNumberOf(today);
+  const isToday = dayNumberOf(target) === dayNumberOf(today);
   const [a, b] = isPast ? [target, today] : [today, target];
 
   const td = totalDays(a, b);
   const { years, months, days } = diffDates(a, b);
   const tw = Math.floor(td / 7);
 
-  const badge   = isPast
-    ? '<span class="badge-past">já passou</span>'
-    : '<span class="badge-future">em breve</span>';
+  let badge, headline;
+  if (isToday) {
+    badge    = '<span class="badge-future">hoje</span>';
+    headline = `é hoje — ${fmtDate(target)}`;
+  } else if (isPast) {
+    badge    = '<span class="badge-past">já passou</span>';
+    headline = `${plural(td, 'dia', 'dias')} desde ${fmtDate(target)}`;
+  } else {
+    badge    = '<span class="badge-future">em breve</span>';
+    headline = `${plural(td, 'dia falta', 'dias faltam')} para ${fmtDate(target)}`;
+  }
 
-  const pretext = isPast ? 'desde' : 'faltam para';
-
-  const el = document.getElementById('c-result');
-  el.classList.remove('hidden');
-  el.innerHTML = `
+  showResult('c-result', `
     <div class="countdown-display">
       ${lbl ? `<p class="countdown-label-name">${escapeHTML(lbl)}</p>` : ''}
       <div class="countdown-big">${fmt(td)}</div>
-      <div class="countdown-unit">dias ${pretext} ${fmtDate(target)} ${badge}</div>
+      <div class="countdown-unit">${headline} ${badge}</div>
     </div>
     <div class="metrics-grid">
-      ${metricCard(years,  'anos')}
-      ${metricCard(months, 'meses')}
-      ${metricCard(days,   'dias')}
-      ${metricCard(tw,     'semanas')}
-    </div>`;
+      ${metricCard(years,  plural(years,  'ano', 'anos'))}
+      ${metricCard(months, plural(months, 'mês', 'meses'))}
+      ${metricCard(days,   plural(days,   'dia', 'dias'))}
+      ${metricCard(tw,     plural(tw,     'semana', 'semanas'))}
+    </div>`);
 }
 
 function calcHoras() {
@@ -932,8 +1056,9 @@ function calcHoras() {
   const ev = document.getElementById('h-end').value;
   if (!sv || !ev) { showError('h-result', 'Informe os dois horários.'); return; }
 
-  let a = new Date(sv);
-  let b = new Date(ev);
+  let a = parseDateTimeInput(sv);
+  let b = parseDateTimeInput(ev);
+  if (!a || !b) { showError('h-result', 'Data ou horário inválido. Use o formato dd/mm/aaaa hh:mm.'); return; }
   const inverted = a > b;
   if (inverted) [a, b] = [b, a];
 
@@ -947,41 +1072,38 @@ function calcHoras() {
   const s = Math.floor((diffMs % 60000) / 1000);
 
   const td = Math.floor(diffMs / 86400000);
-  const tw = Math.floor(td / 7);
 
-  const el = document.getElementById('h-result');
-  el.classList.remove('hidden');
-  el.innerHTML = `
+  showResult('h-result', `
     <div class="metrics-grid">
-      ${metricCard(h, 'horas',   true)}
-      ${metricCard(m, 'minutos')}
-      ${metricCard(s, 'segundos')}
+      ${metricCard(h, plural(h, 'hora', 'horas'),       true)}
+      ${metricCard(m, plural(m, 'minuto', 'minutos'))}
+      ${metricCard(s, plural(s, 'segundo', 'segundos'))}
     </div>
     <div class="totals-bar">
-      ${totalItem(totHr,  'horas totais')}
+      ${totalItem(totHr,  plural(totHr, 'hora total', 'horas totais'))}
       <div class="totals-divider"></div>
-      ${totalItem(totMin, 'minutos')}
+      ${totalItem(totMin, plural(totMin, 'minuto', 'minutos'))}
       <div class="totals-divider"></div>
-      ${totalItem(totSec, 'segundos')}
+      ${totalItem(totSec, plural(totSec, 'segundo', 'segundos'))}
       <div class="totals-divider"></div>
-      ${totalItem(td, 'dias')}
+      ${totalItem(td, plural(td, 'dia', 'dias'))}
       ${inverted ? '<span class="badge-past" style="margin-left:auto">ordem invertida</span>' : ''}
-    </div>`;
+    </div>`);
 }
 
 function calcSemana() {
   const val = document.getElementById('w-date').value;
   if (!val) { showError('w-result', 'Informe uma data.'); return; }
 
-  const target = new Date(val + 'T00:00:00');
-  const today  = new Date();
-  today.setHours(0, 0, 0, 0);
+  const target = parseDateInput(val);
+  if (!target) { showError('w-result', 'Data inválida. Use o formato dd/mm/aaaa.'); return; }
+  const today  = todayLocal();
 
   const weekdayFull = target.toLocaleDateString('pt-BR', { weekday: 'long' });
   const weekdayCap  = weekdayFull.charAt(0).toUpperCase() + weekdayFull.slice(1);
 
-  const isPast  = target < today;
-  const isToday = target.getTime() === today.getTime();
+  const isPast  = dayNumberOf(target) < dayNumberOf(today);
+  const isToday = dayNumberOf(target) === dayNumberOf(today);
 
   let badge, pretext;
   if (isToday) {
@@ -995,20 +1117,23 @@ function calcSemana() {
     pretext = 'será';
   }
 
-  const el = document.getElementById('w-result');
-  el.classList.remove('hidden');
-  el.innerHTML = `
+  showResult('w-result', `
     <div class="countdown-display">
       <div class="countdown-big" style="font-size: clamp(2.2rem, 6vw, 3.5rem);">${weekdayCap}</div>
       <div class="countdown-unit">${fmtDate(target)} ${pretext} ${weekdayCap.toLowerCase()} ${badge}</div>
-    </div>`;
+    </div>`);
+}
+
+// Minúsculas e sem acentos: "São Paulo" → "sao paulo".
+function normalizeText(str) {
+  return String(str).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 }
 
 function setupAutocomplete(inputEl, suggestionsEl, getMatches, renderLabel, onSelect) {
   inputEl.addEventListener('focus', () => inputEl.select());
 
   inputEl.addEventListener('input', () => {
-    const query = inputEl.value.trim().toLowerCase();
+    const query = normalizeText(inputEl.value);
     suggestionsEl.innerHTML = '';
     inputEl.dataset.key = '';
 
@@ -1053,9 +1178,7 @@ function setupAutocomplete(inputEl, suggestionsEl, getMatches, renderLabel, onSe
     if (!suggestionsEl.classList.contains('hidden') && firstMatch) {
       firstMatch.click();
     } else {
-      const card = inputEl.closest('.form-card');
-      const btn  = card ? card.querySelector('.btn-calc') : null;
-      if (btn) btn.click();
+      submitFromInput(inputEl);
     }
   });
 }
@@ -1066,10 +1189,40 @@ const mesInput        = document.getElementById('cl-month');
 const mesSuggestions  = document.getElementById('cl-month-suggestions');
 const nomesDosMeses   = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 
+// Outros nomes pelos quais uma cidade pode ser procurada.
+const cidadeApelidos = {
+  "nova iorque": ["nova york", "new york", "ny"],
+  "tokyo":       ["toquio"],
+  "shenzen":     ["shenzhen"],
+  "amazonia":    ["manaus"],
+  "sicilia":     ["palermo"],
+  "washington":  ["washington dc"],
+  "cidade do mexico": ["mexico"],
+  "amsterdam":   ["amsterda"]
+};
+
+// Termos pesquisáveis de cada cidade: chave, nome exibido e apelidos, sem acentos.
+const cidadeTermos = Object.keys(climaData).map(key => ({
+  key,
+  termos: [key, normalizeText(climaData[key].nome), ...(cidadeApelidos[key] || [])]
+}));
+
+function buscarCidades(query) {
+  const inicio = [], palavra = [];
+  cidadeTermos.forEach(({ key, termos }) => {
+    if (termos.some(t => t.startsWith(query))) {
+      inicio.push(key);
+    } else if (termos.some(t => t.split(/[^a-z0-9]+/).some(w => w && w.startsWith(query)))) {
+      palavra.push(key);
+    }
+  });
+  return inicio.concat(palavra);
+}
+
 setupAutocomplete(
   cidadeInput,
   citySuggestions,
-  query => Object.keys(climaData).filter(key => key.startsWith(query)),
+  buscarCidades,
   key => climaData[key].nome,
   key => { cidadeInput.value = climaData[key].nome; cidadeInput.dataset.key = key; }
 );
@@ -1077,7 +1230,7 @@ setupAutocomplete(
 setupAutocomplete(
   mesInput,
   mesSuggestions,
-  query => nomesDosMeses.filter(m => m.toLowerCase().startsWith(query)),
+  query => nomesDosMeses.filter(m => normalizeText(m).startsWith(query)),
   m => m,
   m => { mesInput.value = m; mesInput.dataset.key = m; }
 );
@@ -1086,7 +1239,7 @@ function calcClima() {
   const key = cidadeInput.dataset.key;
   const mes = mesInput.dataset.key;
 
-  if (!key || !climaData[key]) {
+  if (!key || !Object.prototype.hasOwnProperty.call(climaData, key)) {
     showError('cl-result', 'Selecione uma cidade da lista de sugestões.');
     return;
   }
@@ -1097,24 +1250,46 @@ function calcClima() {
 
   const cidade   = climaData[key];
   const dadosMes = cidade.meses.find(m => m.mes === mes);
+  if (!dadosMes) {
+    showError('cl-result', 'Selecione um mês da lista de sugestões.');
+    return;
+  }
 
-  const el = document.getElementById('cl-result');
-  el.classList.remove('hidden');
-  el.innerHTML = `
+  const media = Math.round((dadosMes.maxima + dadosMes.minima) / 2);
+
+  showResult('cl-result', `
     <div class="countdown-display">
-      <p class="countdown-label-name">${escapeHTML(cidade.nome)} — ${mes}</p>
-      <div class="countdown-big" style="font-size: clamp(2.4rem, 7vw, 4rem);">${dadosMes.maxima}° / ${dadosMes.minima}°</div>
-      <div class="countdown-unit">céu ${dadosMes.ceu} &nbsp;·&nbsp; ${dadosMes.chuva}</div>
-    </div>`;
+      <p class="countdown-label-name">${escapeHTML(cidade.nome)} — ${escapeHTML(mes)}</p>
+      <div class="countdown-big" style="font-size: clamp(2.4rem, 7vw, 4rem);">${dadosMes.maxima} °C / ${dadosMes.minima} °C</div>
+      <div class="countdown-unit">máxima / mínima médias &nbsp;·&nbsp; média de ${media} °C</div>
+      <div class="countdown-unit">céu ${escapeHTML(dadosMes.ceu)} &nbsp;·&nbsp; ${escapeHTML(dadosMes.chuva)}</div>
+    </div>`);
+}
+
+// Enter em qualquer campo: fecha o teclado no celular e aciona o botão do formulário.
+function submitFromInput(inputEl) {
+  const card = inputEl.closest('.form-card');
+  const btn  = card ? card.querySelector('.btn-calc') : null;
+  if (!btn) return;
+  inputEl.blur();
+  btn.click();
 }
 
 document.querySelectorAll('.form-card input:not(#cl-city):not(#cl-month)').forEach(input => {
   input.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter') return;
     e.preventDefault();
-    const card = input.closest('.form-card');
-    const btn  = card ? card.querySelector('.btn-calc') : null;
-    if (btn) btn.click();
+    submitFromInput(input);
+  });
+});
+
+// Ao editar um campo, esconde o resultado anterior para não mostrar um valor que não
+// corresponde mais à entrada atual.
+document.querySelectorAll('.panel').forEach(panel => {
+  const result = panel.querySelector('.result-area');
+  if (!result) return;
+  panel.querySelectorAll('.form-card input').forEach(input => {
+    input.addEventListener('input', () => result.classList.add('hidden'));
   });
 });
 

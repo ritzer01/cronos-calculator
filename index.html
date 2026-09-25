@@ -58,7 +58,7 @@
       <div class="form-card">
         <div class="field">
           <label for="i-birth">Data de nascimento</label>
-          <input type="date" id="i-birth">
+          <input type="text" id="i-birth" class="date-input" data-mask="date" inputmode="numeric" enterkeyhint="go" autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa">
         </div>
         <button class="btn-calc" id="btn-idade">Calcular minha idade</button>
       </div>
@@ -76,11 +76,11 @@
         <div class="field-row">
           <div class="field">
             <label for="d-start">Data inicial</label>
-            <input type="date" id="d-start">
+            <input type="text" id="d-start" class="date-input" data-mask="date" inputmode="numeric" enterkeyhint="go" autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa">
           </div>
           <div class="field">
             <label for="d-end">Data final</label>
-            <input type="date" id="d-end">
+            <input type="text" id="d-end" class="date-input" data-mask="date" inputmode="numeric" enterkeyhint="go" autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa">
           </div>
         </div>
         <button class="btn-calc" id="btn-diff">Calcular diferença</button>
@@ -98,7 +98,7 @@
       <div class="form-card">
         <div class="field">
           <label for="c-target">Data alvo</label>
-          <input type="date" id="c-target">
+          <input type="text" id="c-target" class="date-input" data-mask="date" inputmode="numeric" enterkeyhint="go" autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa">
         </div>
         <div class="field">
           <label for="c-label">Apelido (opcional)</label>
@@ -120,11 +120,11 @@
         <div class="field-row">
           <div class="field">
             <label for="h-start">Data e hora inicial</label>
-            <input type="datetime-local" id="h-start">
+            <input type="text" id="h-start" class="date-input" data-mask="datetime" inputmode="numeric" enterkeyhint="go" autocomplete="off" maxlength="16" placeholder="dd/mm/aaaa hh:mm">
           </div>
           <div class="field">
             <label for="h-end">Data e hora final</label>
-            <input type="datetime-local" id="h-end">
+            <input type="text" id="h-end" class="date-input" data-mask="datetime" inputmode="numeric" enterkeyhint="go" autocomplete="off" maxlength="16" placeholder="dd/mm/aaaa hh:mm">
           </div>
         </div>
         <button class="btn-calc" id="btn-horas">Calcular diferença</button>
@@ -142,7 +142,7 @@
       <div class="form-card">
         <div class="field">
           <label for="w-date">Data</label>
-          <input type="date" id="w-date">
+          <input type="text" id="w-date" class="date-input" data-mask="date" inputmode="numeric" enterkeyhint="go" autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa">
         </div>
         <button class="btn-calc" id="btn-semana">Ver dia da semana</button>
       </div>
@@ -154,7 +154,7 @@
   <div class="panel-hero">
     <span class="panel-tag">clima médio</span>
     <h1>Como é o clima <em>naquela época</em>?</h1>
-    <p class="panel-sub">Temperatura média, estação e tendência de chuva por cidade e mês.</p>
+    <p class="panel-sub">Temperaturas máxima e mínima médias (°C), céu e tendência de chuva por cidade e mês.</p>
   </div>
   <div class="form-card">
     <div class="field-row">
@@ -176,7 +176,7 @@
   </main>
 
   <footer>
-    <p>Cronos &mdash; calculadora de datas e tempo &nbsp;·&nbsp; <a href="privacidade.html" style="color:var(--text3);text-decoration:none;border-bottom:1px solid var(--border)">Política de Privacidade</a></p>
+    <p>Cronos &mdash; calculadora de datas e tempo &nbsp;·&nbsp; <a href="privacidade.html" style="color:var(--text3);text-decoration:none;border-bottom:1px solid var(--border)">Política de Privacidade</a> &nbsp;·&nbsp; <a href="#" id="lgpd-open" style="color:var(--text3);text-decoration:none;border-bottom:1px solid var(--border)">Preferências de privacidade</a></p>
   </footer>
 
   <script src="script.js"></script>

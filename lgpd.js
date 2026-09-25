@@ -69,6 +69,9 @@
 
   // ── Renderiza o banner ─────────────────────────────────────────────────────
   function renderBanner() {
+    const existing = document.getElementById('lgpd-banner');
+    if (existing && !existing.classList.contains('lgpd-hide')) return;
+    if (existing) existing.remove();
     const banner = document.createElement('div');
     banner.id = 'lgpd-banner';
     banner.setAttribute('role', 'dialog');
@@ -79,10 +82,10 @@
         <div class="lgpd-text">
           <p class="lgpd-title">Sua privacidade</p>
           <p class="lgpd-desc">
-            Usamos cookies essenciais para o funcionamento do site.
+            Por padrão, guardamos só a sua escolha de privacidade, no próprio navegador.
             Com sua permissão, também podemos usar cookies analíticos
             e publicitários. Veja nossa
-            <a href="/privacidade.html" class="lgpd-link">Política de Privacidade</a>.
+            <a href="privacidade.html" class="lgpd-link">Política de Privacidade</a>.
           </p>
         </div>
 
@@ -113,6 +116,13 @@
 
     document.body.appendChild(banner);
 
+    // Reabertura pelo rodapé: mostra a escolha salva anteriormente
+    const current = getConsent();
+    if (current) {
+      document.getElementById('lgpd-chk-analytics').checked = !!current.analytics;
+      document.getElementById('lgpd-chk-ads').checked       = !!current.ads;
+    }
+
     document.getElementById('lgpd-accept-all').addEventListener('click', () => {
       saveConsent(true, true);
     });
@@ -130,6 +140,15 @@
 
   // ── Init ───────────────────────────────────────────────────────────────────
   function init() {
+    // Link "Preferências de privacidade" no rodapé: permite alterar ou revogar a escolha
+    const openLink = document.getElementById('lgpd-open');
+    if (openLink) {
+      openLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        renderBanner();
+      });
+    }
+
     const consent = getConsent();
 
     if (consent === null) {

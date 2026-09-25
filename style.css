@@ -198,6 +198,11 @@ main {
 
 .field input::placeholder { color: var(--text3); }
 
+.field input.date-input {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+}
+
 
 .btn-calc {
   padding: 14px 28px;
@@ -413,6 +418,9 @@ footer {
   .field-row { grid-template-columns: 1fr; }
 
   .btn-calc { align-self: stretch; text-align: center; }
+
+  /* 16px evita que o iPhone dê zoom ao tocar no campo */
+  .field input { font-size: 16px; }
 
   .totals-bar { gap: 1rem; }
 
