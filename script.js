@@ -783,24 +783,73 @@ function plural(n, singular, pluralForm) {
   return Math.abs(n) === 1 ? singular : pluralForm;
 }
 
-// Converte o valor de um <input type="date"> ("AAAA-MM-DD") em Date local ao meio-dia
+// Lê uma data digitada como "dd/mm/aaaa" e devolve um Date local ao meio-dia
 // (o meio-dia evita meias-noites inexistentes em dias de mudança de horário).
-// Retorna null se o texto não for uma data de calendário válida (ex.: ano com 5+ dígitos).
+// Retorna null se não for uma data de calendário válida.
 function parseDateInput(val) {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(val);
+  const m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(val.trim());
   if (!m) return null;
-  const y = +m[1], mo = +m[2] - 1, d = +m[3];
-  if (mo > 11 || d < 1 || d > daysInMonth(y, mo)) return null;
+  const d = +m[1], mo = +m[2] - 1, y = +m[3];
+  if (mo < 0 || mo > 11 || d < 1 || d > daysInMonth(y, mo)) return null;
   const date = new Date(2000, 0, 1, 12);
   date.setFullYear(y, mo, d);
   return date;
 }
 
+// Lê "dd/mm/aaaa hh:mm" e devolve o Date local correspondente, ou null se inválido.
 function parseDateTimeInput(val) {
-  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?$/.test(val)) return null;
-  const date = new Date(val);
-  return isNaN(date) ? null : date;
+  const m = /^(\d{2}\/\d{2}\/\d{4}) (\d{2}):(\d{2})$/.exec(val.trim());
+  if (!m) return null;
+  const day = parseDateInput(m[1]);
+  const h = +m[2], mi = +m[3];
+  if (!day || h > 23 || mi > 59) return null;
+  day.setHours(h, mi, 0, 0);
+  return day;
 }
+
+// Máscara de digitação: o usuário digita só números e as barras, o espaço e os
+// dois-pontos aparecem sozinhos (dd/mm/aaaa ou dd/mm/aaaa hh:mm).
+function formatDateDigits(digits, withTime) {
+  const seps = withTime ? ['/', '/', ' ', ':'] : ['/', '/'];
+  const sizes = withTime ? [2, 2, 4, 2, 2] : [2, 2, 4];
+  let out = '', pos = 0;
+  for (let i = 0; i < sizes.length && pos < digits.length; i++) {
+    if (i > 0) out += seps[i - 1];
+    out += digits.slice(pos, pos + sizes[i]);
+    pos += sizes[i];
+  }
+  return out;
+}
+
+function setupDateMask(input) {
+  const withTime = input.dataset.mask === 'datetime';
+  const maxDigits = withTime ? 12 : 8;
+
+  input.addEventListener('input', () => {
+    let raw = input.value;
+    // Colar no formato "aaaa-mm-dd" (ou "aaaa-mm-ddThh:mm") também funciona
+    const iso = /^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2}))?/.exec(raw.trim());
+    if (iso) raw = iso[3] + iso[2] + iso[1] + (withTime && iso[4] ? iso[4] + iso[5] : '');
+
+    const caret = input.selectionStart == null ? raw.length : input.selectionStart;
+    const digitsBeforeCaret = raw.slice(0, caret).replace(/\D/g, '').length;
+    const digits = raw.replace(/\D/g, '').slice(0, maxDigits);
+    const formatted = formatDateDigits(digits, withTime);
+    if (formatted === input.value) return;
+    input.value = formatted;
+
+    // Mantém o cursor depois do mesmo número de dígitos que antes
+    let newCaret = 0, seen = 0;
+    while (newCaret < formatted.length && seen < digitsBeforeCaret) {
+      if (/\d/.test(formatted[newCaret])) seen++;
+      newCaret++;
+    }
+    if (iso) newCaret = formatted.length;
+    try { input.setSelectionRange(newCaret, newCaret); } catch (_) {}
+  });
+}
+
+document.querySelectorAll('input[data-mask]').forEach(setupDateMask);
 
 // Número do dia no calendário (independente de fuso, horário de verão e horário histórico local).
 function dayNumber(y, m, d) {
@@ -857,8 +906,12 @@ function revealResult(el) {
     const viewH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
     const rect  = el.getBoundingClientRect();
     const margin = 16;
-    if (rect.bottom <= viewH - margin && rect.top >= 0) return;
-    const delta = Math.min(rect.bottom - viewH + margin, rect.top - margin);
+    // O cabeçalho fica fixo no topo; o resultado não deve parar escondido atrás dele
+    const header = document.querySelector('header');
+    const pos = header ? getComputedStyle(header).position : '';
+    const topLimit = (pos === 'sticky' || pos === 'fixed') ? header.getBoundingClientRect().bottom : 0;
+    if (rect.bottom <= viewH - margin && rect.top >= topLimit) return;
+    const delta = Math.min(rect.bottom - viewH + margin, rect.top - topLimit - margin);
     if (delta > 0) window.scrollBy({ top: delta, behavior: 'smooth' });
   });
 }
@@ -895,7 +948,7 @@ function calcIdade() {
   if (!val) { showError('i-result', 'Informe uma data de nascimento.'); return; }
 
   const birth = parseDateInput(val);
-  if (!birth) { showError('i-result', 'Data de nascimento inválida.'); return; }
+  if (!birth) { showError('i-result', 'Data de nascimento inválida. Use o formato dd/mm/aaaa.'); return; }
   const today = todayLocal();
 
   if (dayNumberOf(birth) > dayNumberOf(today)) { showError('i-result', 'A data de nascimento não pode ser no futuro.'); return; }
@@ -930,7 +983,7 @@ function calcDiff() {
 
   let a = parseDateInput(sv);
   let b = parseDateInput(ev);
-  if (!a || !b) { showError('d-result', 'Data inválida.'); return; }
+  if (!a || !b) { showError('d-result', 'Data inválida. Use o formato dd/mm/aaaa.'); return; }
   const inverted = dayNumberOf(a) > dayNumberOf(b);
   if (inverted) [a, b] = [b, a];
 
@@ -961,7 +1014,7 @@ function calcCountdown() {
 
   const lbl    = document.getElementById('c-label').value.trim();
   const target = parseDateInput(val);
-  if (!target) { showError('c-result', 'Data alvo inválida.'); return; }
+  if (!target) { showError('c-result', 'Data alvo inválida. Use o formato dd/mm/aaaa.'); return; }
   const today  = todayLocal();
 
   const isPast  = dayNumberOf(target) < dayNumberOf(today);
@@ -1005,7 +1058,7 @@ function calcHoras() {
 
   let a = parseDateTimeInput(sv);
   let b = parseDateTimeInput(ev);
-  if (!a || !b) { showError('h-result', 'Data ou horário inválido.'); return; }
+  if (!a || !b) { showError('h-result', 'Data ou horário inválido. Use o formato dd/mm/aaaa hh:mm.'); return; }
   const inverted = a > b;
   if (inverted) [a, b] = [b, a];
 
@@ -1043,7 +1096,7 @@ function calcSemana() {
   if (!val) { showError('w-result', 'Informe uma data.'); return; }
 
   const target = parseDateInput(val);
-  if (!target) { showError('w-result', 'Data inválida.'); return; }
+  if (!target) { showError('w-result', 'Data inválida. Use o formato dd/mm/aaaa.'); return; }
   const today  = todayLocal();
 
   const weekdayFull = target.toLocaleDateString('pt-BR', { weekday: 'long' });
