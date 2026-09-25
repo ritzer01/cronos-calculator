@@ -85,7 +85,7 @@
             Por padrão, guardamos só a sua escolha de privacidade, no próprio navegador.
             Com sua permissão, também podemos usar cookies analíticos
             e publicitários. Veja nossa
-            <a href="/privacidade.html" class="lgpd-link">Política de Privacidade</a>.
+            <a href="privacidade.html" class="lgpd-link">Política de Privacidade</a>.
           </p>
         </div>
 
