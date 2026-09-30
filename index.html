@@ -27,8 +27,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260925">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260930">
 </head>
 <body>
 
@@ -43,6 +43,7 @@
       <a href="#" class="nav-link" data-tab="horas">Horários</a>
       <a href="#" class="nav-link" data-tab="semana">Dia da semana</a>
       <a href="#" class="nav-link" data-tab="somar">Somar/Diminuir</a>
+      <a href="#" class="nav-link" data-tab="calendario">Calendário</a>
       <a href="#" class="nav-link" data-tab="clima">Clima</a>
     </nav>
   </header>
@@ -188,6 +189,30 @@
       <div id="op-result" class="result-area hidden"></div>
     </section>
 
+    <!-- CALENDÁRIO -->
+    <section class="panel" id="panel-calendario">
+      <div class="panel-hero">
+        <span class="panel-tag">calendário</span>
+        <h1>O calendário de <em>qualquer ano</em></h1>
+        <p class="panel-sub">Veja o ano inteiro ou abra direto um mês.</p>
+      </div>
+      <div class="form-card">
+        <div class="field-row">
+          <div class="field">
+            <label for="cal-year">Ano</label>
+            <input type="text" id="cal-year" inputmode="numeric" enterkeyhint="go" autocomplete="off" maxlength="4" placeholder="ex: 2026">
+          </div>
+          <div class="field autocomplete-wrap">
+            <label for="cal-month">Mês (opcional)</label>
+            <input type="text" id="cal-month" placeholder="ex: Setembro" autocomplete="off">
+            <div id="cal-month-suggestions" class="suggestions-box hidden"></div>
+          </div>
+        </div>
+        <button class="btn-calc" id="btn-calendario">Ver calendário</button>
+      </div>
+      <div id="cal-result" class="result-area hidden"></div>
+    </section>
+
 <!-- CLIMA -->
 <section class="panel" id="panel-clima">
   <div class="panel-hero">
@@ -219,7 +244,7 @@
   </footer>
 
   <!-- Ao alterar script.js, lgpd.js ou style.css, troque o ?v= para o navegador baixar a versão nova -->
-  <script src="script.js?v=20260925"></script>
-  <script src="lgpd.js?v=20260925"></script>
+  <script src="script.js?v=20260930"></script>
+  <script src="lgpd.js?v=20260930"></script>
 </body>
 </html>

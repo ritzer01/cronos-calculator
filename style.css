@@ -686,3 +686,196 @@ footer {
   border-color: var(--accent2);
   color: var(--accent);
 }
+
+/* ─── Calendário ─────────────────────────────────────────────────────── */
+
+.cal-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+}
+
+/* Visão do ano */
+.cal-year-title {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8vw, 3.6rem);
+  line-height: 1;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.cal-year-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem 1.5rem;
+}
+
+.cal-mini {
+  display: block;
+  align-self: start; /* não esticar: botão centraliza o conteúdo na vertical */
+  padding: 6px;
+  margin: -6px;
+  width: calc(100% + 12px);
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Só em aparelhos com mouse: no toque o :hover fica "grudado" depois de tocar */
+@media (hover: hover) {
+  .cal-mini:hover { background: var(--accent-bg); }
+}
+
+.cal-mini:focus-visible {
+  outline: 1px solid var(--accent2);
+  background: var(--accent-bg);
+}
+
+.cal-mini-name {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.78rem, 2.6vw, 1.05rem);
+  color: var(--text);
+  margin-bottom: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cal-mini-name.is-current { color: var(--accent); }
+
+.cal-mini-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  row-gap: 2px;
+  font-size: clamp(0.62rem, 1.9vw, 0.75rem);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--text);
+}
+
+.cal-mini-days span {
+  display: block;
+  height: 1.6em;
+  line-height: 1.6em;
+}
+
+.cal-mini-days .is-today {
+  width: 1.6em;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+/* Visão do mês */
+.cal-back {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  color: var(--accent);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .cal-back:hover { color: var(--text); }
+}
+
+.cal-month-title {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 7vw, 3rem);
+  line-height: 1.1;
+  color: var(--text);
+  text-align: left;
+  margin: 0.35rem 0 1.25rem;
+}
+
+.cal-weekdays,
+.cal-month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.cal-weekdays {
+  padding-bottom: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: var(--text3);
+}
+
+.cal-cell {
+  min-height: 64px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cal-day {
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.cal-cell.is-weekend .cal-day { color: var(--text3); }
+
+.cal-day.is-today,
+.cal-cell.is-weekend .cal-day.is-today {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.cal-clima-link {
+  margin-top: 1.25rem;
+  padding: 10px 16px;
+  background: none;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  color: var(--accent);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cal-clima-link:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent2);
+}
+
+@media (max-width: 600px) {
+  .cal-card { padding: 1.1rem 0.9rem; }
+  .cal-year-grid { gap: 1.25rem 0.75rem; }
+  .cal-cell { min-height: 52px; padding-top: 6px; }
+  .cal-day { font-size: 0.95rem; }
+}
+
+@media (max-width: 339px) {
+  .cal-year-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
