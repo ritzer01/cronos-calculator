@@ -2696,16 +2696,23 @@ const climaData = {
   }
 };
 
+// Mostra a aba `tab` (ex.: "clima") e marca o link correspondente no menu.
+function switchTab(tab) {
+  const link  = document.querySelector(`.nav-link[data-tab="${tab}"]`);
+  const panel = document.getElementById('panel-' + tab);
+  if (!link || !panel) return;
+
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+
+  link.classList.add('active');
+  panel.classList.add('active');
+}
+
 document.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
-    const tab = link.dataset.tab;
-
-    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-
-    link.classList.add('active');
-    document.getElementById('panel-' + tab).classList.add('active');
+    switchTab(link.dataset.tab);
   });
 });
 
@@ -3337,6 +3344,155 @@ function calcClima() {
     </div>`);
 }
 
+// ─── Calendário ────────────────────────────────────────────────────────────
+
+const calAnoInput       = document.getElementById('cal-year');
+const calMesInput       = document.getElementById('cal-month');
+const calMesSuggestions = document.getElementById('cal-month-suggestions');
+const calResult         = document.getElementById('cal-result');
+
+setupAutocomplete(
+  calMesInput,
+  calMesSuggestions,
+  query => nomesDosMeses.filter(m => normalizeText(m).startsWith(query)),
+  m => m,
+  m => { calMesInput.value = m; calMesInput.dataset.key = m; }
+);
+
+// Dia da semana do dia 1 do mês (0 = domingo). O dia 0 do dayNumber é 01/01/1970, uma quinta.
+function primeiroDiaDaSemana(y, m) {
+  return ((dayNumber(y, m, 1) + 4) % 7 + 7) % 7;
+}
+
+function hojeYMD() {
+  const hoje = todayLocal();
+  return { y: hoje.getFullYear(), m: hoje.getMonth(), d: hoje.getDate() };
+}
+
+function renderCalendarioAno(y) {
+  const hoje = hojeYMD();
+
+  const meses = nomesDosMeses.map((nome, m) => {
+    const inicio = primeiroDiaDaSemana(y, m);
+    const total  = daysInMonth(y, m);
+    const ehMesAtual = hoje.y === y && hoje.m === m;
+
+    let dias = '<span></span>'.repeat(inicio);
+    for (let d = 1; d <= total; d++) {
+      const ehHoje = ehMesAtual && hoje.d === d;
+      dias += `<span${ehHoje ? ' class="is-today"' : ''}>${d}</span>`;
+    }
+
+    return `
+      <button type="button" class="cal-mini" data-month="${m}" aria-label="${nome} de ${y}">
+        <span class="cal-mini-name${ehMesAtual ? ' is-current' : ''}">${nome}</span>
+        <span class="cal-mini-days" aria-hidden="true">${dias}</span>
+      </button>`;
+  }).join('');
+
+  showResult('cal-result', `
+    <div class="cal-card" data-year="${y}">
+      <h2 class="cal-year-title">${y}</h2>
+      <div class="cal-year-grid">${meses}</div>
+    </div>`);
+}
+
+function renderCalendarioMes(y, m) {
+  const hoje   = hojeYMD();
+  const inicio = primeiroDiaDaSemana(y, m);
+  const total  = daysInMonth(y, m);
+  // Só as semanas necessárias: completa a última linha com células vazias
+  const celulas = Math.ceil((inicio + total) / 7) * 7;
+
+  let grade = '';
+  for (let i = 0; i < celulas; i++) {
+    const d = i - inicio + 1;
+    const fimDeSemana = i % 7 === 0 || i % 7 === 6;
+    const classes = 'cal-cell' + (fimDeSemana ? ' is-weekend' : '');
+    if (d < 1 || d > total) {
+      grade += `<div class="${classes}" aria-hidden="true"></div>`;
+    } else {
+      const ehHoje = hoje.y === y && hoje.m === m && hoje.d === d;
+      grade += `<div class="${classes}"><span class="cal-day${ehHoje ? ' is-today' : ''}">${d}</span></div>`;
+    }
+  }
+
+  const semana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'].map(l => `<span>${l}</span>`).join('');
+
+  showResult('cal-result', `
+    <div class="cal-card" data-year="${y}" data-month="${m}">
+      <button type="button" class="cal-back" data-action="voltar">‹ ${y}</button>
+      <h2 class="cal-month-title">${nomesDosMeses[m]}</h2>
+      <div class="cal-weekdays" aria-hidden="true">${semana}</div>
+      <div class="cal-month-grid">${grade}</div>
+      <button type="button" class="cal-clima-link" data-action="clima">Ver clima deste mês →</button>
+    </div>`);
+}
+
+// Mês digitado sem escolher na lista: aceita se só um mês combinar (ex.: "set", "marco").
+function mesDoCalendario() {
+  if (calMesInput.dataset.key) return nomesDosMeses.indexOf(calMesInput.dataset.key);
+  const q = normalizeText(calMesInput.value);
+  if (!q) return null;
+  const exato = nomesDosMeses.findIndex(m => normalizeText(m) === q);
+  if (exato !== -1) return exato;
+  const parecidos = nomesDosMeses.filter(m => normalizeText(m).startsWith(q));
+  return parecidos.length === 1 ? nomesDosMeses.indexOf(parecidos[0]) : -1;
+}
+
+function calcCalendario() {
+  const val = calAnoInput.value.trim();
+  if (!val) { showError('cal-result', 'Informe um ano.'); return; }
+
+  const y = /^\d{1,4}$/.test(val) ? parseInt(val, 10) : NaN;
+  if (!(y >= 1583 && y <= 9999)) {
+    showError('cal-result', 'Ano inválido. Use um ano entre 1583 e 9999.');
+    return;
+  }
+
+  const m = mesDoCalendario();
+  if (m === -1) {
+    showError('cal-result', 'Mês inválido. Escolha um mês da lista de sugestões ou deixe em branco.');
+    return;
+  }
+
+  if (m === null) renderCalendarioAno(y);
+  else renderCalendarioMes(y, m);
+}
+
+// Leva o mês escolhido para a aba Clima, com a cidade em branco para a pessoa digitar.
+function abrirClimaDoMes(m) {
+  switchTab('clima');
+
+  mesInput.value = nomesDosMeses[m];
+  mesInput.dataset.key = nomesDosMeses[m];
+  mesSuggestions.classList.add('hidden');
+
+  cidadeInput.value = '';
+  cidadeInput.dataset.key = '';
+  citySuggestions.innerHTML = '';
+  citySuggestions.classList.add('hidden');
+
+  document.getElementById('cl-result').classList.add('hidden');
+  window.scrollTo({ top: 0 });
+  cidadeInput.focus();
+}
+
+// Um único listener para todos os cliques dentro do calendário (meses, voltar, clima).
+calResult.addEventListener('click', (e) => {
+  const card = e.target.closest('.cal-card');
+  if (!card) return;
+  const y = parseInt(card.dataset.year, 10);
+
+  const mini = e.target.closest('.cal-mini');
+  if (mini) { renderCalendarioMes(y, parseInt(mini.dataset.month, 10)); return; }
+
+  const acao = e.target.closest('[data-action]');
+  if (!acao) return;
+  if (acao.dataset.action === 'voltar') renderCalendarioAno(y);
+  if (acao.dataset.action === 'clima')  abrirClimaDoMes(parseInt(card.dataset.month, 10));
+});
+
 // Enter em qualquer campo: fecha o teclado no celular e aciona o botão do formulário.
 function submitFromInput(inputEl) {
   const card = inputEl.closest('.form-card');
@@ -3346,7 +3502,7 @@ function submitFromInput(inputEl) {
   btn.click();
 }
 
-document.querySelectorAll('.form-card input:not(#cl-city):not(#cl-month)').forEach(input => {
+document.querySelectorAll('.form-card input:not(#cl-city):not(#cl-month):not(#cal-month)').forEach(input => {
   input.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter') return;
     e.preventDefault();
@@ -3371,3 +3527,4 @@ document.getElementById('btn-horas').addEventListener('click', calcHoras);
 document.getElementById('btn-semana').addEventListener('click', calcSemana);
 document.getElementById('btn-clima').addEventListener('click', calcClima);
 document.getElementById('btn-somar').addEventListener('click', calcSomar);
+document.getElementById('btn-calendario').addEventListener('click', calcCalendario);
