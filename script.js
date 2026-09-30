@@ -3062,6 +3062,56 @@ function calcSemana() {
     </div>`);
 }
 
+// Botões de alternância (Somar/Diminuir, Dias/Meses/Anos): só um fica ativo por grupo.
+document.querySelectorAll('.toggle-group').forEach(group => {
+  group.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      group.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Trocar a opção invalida o resultado anterior
+      const result = group.closest('.panel').querySelector('.result-area');
+      if (result) result.classList.add('hidden');
+    });
+  });
+});
+
+function calcSomar() {
+  const val = document.getElementById('op-date').value;
+  if (!val) { showError('op-result', 'Informe uma data base.'); return; }
+
+  const base = parseDateInput(val);
+  if (!base) { showError('op-result', 'Data inválida. Use o formato dd/mm/aaaa.'); return; }
+
+  const amount = parseInt(document.getElementById('op-amount').value, 10);
+  if (!amount || amount <= 0) { showError('op-result', 'Informe uma quantidade válida.'); return; }
+
+  const tipo    = document.querySelector('#op-type-group .toggle-btn.active').dataset.value;
+  const unidade = document.querySelector('#op-unit-group .toggle-btn.active').dataset.value;
+  const sinal   = tipo === 'soma' ? 1 : -1;
+
+  // Se o dia não existe no mês de destino, "estoura" pro mês seguinte (31/01 + 1 mês = 03/03)
+  const resultado = new Date(base);
+  if (unidade === 'dias')  resultado.setDate(resultado.getDate() + sinal * amount);
+  if (unidade === 'meses') resultado.setMonth(resultado.getMonth() + sinal * amount);
+  if (unidade === 'anos')  resultado.setFullYear(resultado.getFullYear() + sinal * amount);
+
+  const weekdayFull = resultado.toLocaleDateString('pt-BR', { weekday: 'long' });
+  const weekdayCap  = weekdayFull.charAt(0).toUpperCase() + weekdayFull.slice(1);
+  const sinalTxt    = tipo === 'soma' ? '+' : '−';
+  const unidadeLbl  = {
+    dias:  plural(amount, 'dia', 'dias'),
+    meses: plural(amount, 'mês', 'meses'),
+    anos:  plural(amount, 'ano', 'anos')
+  }[unidade];
+
+  showResult('op-result', `
+    <div class="countdown-display">
+      <p class="countdown-label-name">${fmtDate(base)} ${sinalTxt} ${fmt(amount)} ${unidadeLbl}</p>
+      <div class="countdown-big" style="font-size: clamp(2rem, 6vw, 3.2rem);">${fmtDate(resultado)}</div>
+      <div class="countdown-unit">${weekdayCap}</div>
+    </div>`);
+}
+
 // Minúsculas e sem acentos: "São Paulo" → "sao paulo".
 function normalizeText(str) {
   return String(str).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
@@ -3320,3 +3370,4 @@ document.getElementById('btn-countdown').addEventListener('click', calcCountdown
 document.getElementById('btn-horas').addEventListener('click', calcHoras);
 document.getElementById('btn-semana').addEventListener('click', calcSemana);
 document.getElementById('btn-clima').addEventListener('click', calcClima);
+document.getElementById('btn-somar').addEventListener('click', calcSomar);
